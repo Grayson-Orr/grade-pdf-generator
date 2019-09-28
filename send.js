@@ -4,7 +4,7 @@
  */
 
 const nodeoutlook = require('nodejs-nodemailer-outlook')
-const colors = require('colors')
+require('colors')
 const { email, password } = require('./config.json')
 const data = require('./data.json')
 
@@ -28,7 +28,9 @@ jsonPath.forEach((d, idx) => {
       break
     case courseJSONFile[2]:
       subject = `${courseName[2]} Course Results`
-      attachment = `./pdf/${coursePDFDirectory[2]}/final/final-results-${githubname}.pdf`
+      attachment = `./pdf/${
+        coursePDFDirectory[2]
+      }/final/final-results-${githubname}.pdf`
       break
     case courseJSONFile[3]:
       subject = `${courseName[3]} Course Results`
@@ -41,7 +43,7 @@ jsonPath.forEach((d, idx) => {
    * Send an email every 7 seconds
    */
   setTimeout(_ => {
-    console.log(colors.green(`Start PDF sent - ${studentname}.`))
+    console.log(`Start PDF sent - ${studentname}.`.green)
     nodeoutlook.sendEmail({
       auth: {
         user: email,
@@ -58,7 +60,7 @@ jsonPath.forEach((d, idx) => {
       ],
       onError: err => console.log(err),
       onSuccess: _ => {
-        console.log(colors.red(`Finish PDF sent - ${studentname}.`))
+        console.log(`Finish PDF sent - ${studentname}.`.blue)
       }
     })
   }, idx * interval)

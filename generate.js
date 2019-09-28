@@ -9,7 +9,14 @@ const path = require('path')
 const csv = require('csv-parser')
 require('colors')
 const data = require('./data.json')
-const { createDir, createPDF, createZIP, createJSON, markCheckpoint, filterObj } = require('./helper')
+const {
+  createDir,
+  createPDF,
+  createZIP,
+  createJSON,
+  markCheckpoint,
+  filterObj
+} = require('./helper')
 
 let pdf
 let courseName
@@ -21,7 +28,12 @@ let inClassCheckpointsTblOne = {}
 let inClassCheckpointsTblTwo = {}
 let assignmentOneTbl = {}
 let assignmentTwoTbl = {}
-let { courseCSVFile, courseJSONFile, coursePDFDirectory, courseAssessment } = data
+let {
+  courseCSVFile,
+  courseJSONFile,
+  coursePDFDirectory,
+  courseAssessment
+} = data
 
 const pdfs = []
 const csvFilename = process.argv[2]
@@ -32,33 +44,48 @@ const jsonDirName = path.join(__dirname, 'json')
 const txtColor = { black: '#000000', earth: '#0000A0' }
 
 /**
- * @param {string} myAssignmentName 
- * @param {string} myPDFDir 
- * @param {string} myStudentFilename 
- * @param {string} myCSVFilename 
- * @param {string} myJSONFilename 
- * @param {string} myCourseName 
+ * @param {string} myAssignmentName
+ * @param {string} myPDFDir
+ * @param {string} myStudentFilename
+ * @param {string} myCSVFilename
+ * @param {string} myJSONFilename
+ * @param {string} myCourseName
  */
-const generate = (myAssignmentName, myPDFDir, myStudentFilename,
-  myCSVFilename, myJSONFilename, myCourseName) => {
+const generate = (
+  myAssignmentName,
+  myPDFDir,
+  myStudentFilename,
+  myCSVFilename,
+  myJSONFilename,
+  myCourseName
+) => {
   assignmentName = myAssignmentName
   createDir(path.join(__dirname, 'pdf', myPDFDir))
   pdfFile = createPDF(`pdf/${myPDFDir}`, myStudentFilename)
   createZIP(`pdf/${myPDFDir}`, `zip/${myPDFDir}.zip`)
-  createJSON(path.join(__dirname, 'csv', myCSVFilename), `${jsonDirName}/${myJSONFilename}`)
+  createJSON(
+    path.join(__dirname, 'csv', myCSVFilename),
+    `${jsonDirName}/${myJSONFilename}`
+  )
   courseName = myCourseName
 }
 
 /**
- * @param {string} myColor 
- * @param {object} myTbl 
- * @param {number} myMarginLeft 
- * @param {number} myMarginTop 
- * @param {number} myWidth 
- * @param {number} myFontSize 
+ * @param {string} myColor
+ * @param {object} myTbl
+ * @param {number} myMarginLeft
+ * @param {number} myMarginTop
+ * @param {number} myWidth
+ * @param {number} myFontSize
  */
-const createTable = (myColor, myTbl, myMarginLeft,
-  myMarginTop, myWidth, myFontSize) => {
+const createTable = (
+  myColor,
+  myTbl,
+  myMarginLeft,
+  myMarginTop,
+  myWidth,
+  myFontSize
+) => {
   pdf.fillColor(myColor).table(myTbl, myMarginLeft, myMarginTop, {
     width: myWidth,
     prepareHeader: () => pdf.fontSize(myFontSize),
@@ -67,10 +94,10 @@ const createTable = (myColor, myTbl, myMarginLeft,
 }
 
 /**
- * @param {number} mySpacing 
- * @param {number} myFontSize 
- * @param {string} myColor 
- * @param {string} myText 
+ * @param {number} mySpacing
+ * @param {number} myFontSize
+ * @param {string} myColor
+ * @param {string} myText
  */
 const createHeading = (mySpacing, myFontSize, myColor, myText) => {
   pdf
@@ -81,15 +108,21 @@ const createHeading = (mySpacing, myFontSize, myColor, myText) => {
 }
 
 /**
- * @param {number} mySpacing 
- * @param {number} myFontSize 
- * @param {string} myColor 
- * @param {string} myTxt 
- * @param {string} myContColor 
- * @param {string} myContTxt 
+ * @param {number} mySpacing
+ * @param {number} myFontSize
+ * @param {string} myColor
+ * @param {string} myTxt
+ * @param {string} myContColor
+ * @param {string} myContTxt
  */
-const createSubheading = (mySpacing, myFontSize, myColor, myTxt,
-  myContColor, myContTxt) => {
+const createSubheading = (
+  mySpacing,
+  myFontSize,
+  myColor,
+  myTxt,
+  myContColor,
+  myContTxt
+) => {
   pdf
     .moveDown(mySpacing)
     .fontSize(myFontSize)
@@ -100,13 +133,20 @@ const createSubheading = (mySpacing, myFontSize, myColor, myTxt,
 }
 
 /**
- * @param {object} myArr 
- * @param {string} myColor 
- * @param {string} myContColor 
+ * @param {object} myArr
+ * @param {string} myColor
+ * @param {string} myContColor
  */
 const createFeedback = (myArr, myColor, myContColor) => {
   for (let [i, val] of myArr.entries())
-    createSubheading(1, 10, myColor, `Checkpoint ${i + 1} - : `, myContColor, val)
+    createSubheading(
+      1,
+      10,
+      myColor,
+      `Checkpoint ${i + 1} - : `,
+      myContColor,
+      val
+    )
 }
 
 /**
@@ -189,12 +229,30 @@ fs.createReadStream(path.join(__dirname, 'csv', csvFilename))
           markCheckpoint(progFourCPOne, inClassCPRowsOne)
           markCheckpoint(progFourCPTwo, inClassCPRowsTwo)
           table = { headers: courseAssessment.prog_four, rows: [progFourRow] }
-          inClassCheckpointsTblOne = { headers: courseAssessment.prog_four_checkpoints_1, rows: [inClassCPRowsOne] }
-          inClassCheckpointsTblTwo = { headers: courseAssessment.prog_four_checkpoints_2, rows: [inClassCPRowsTwo] }
-          assignmentOneTbl = { headers: courseAssessment.markingSchedule, rows: roguelikeAssignment }
-          assignmentTwoTbl = { headers: courseAssessment.markingSchedule, rows: langExplorationAssignment }
-          generate('Roguelike Assignment', coursePDFDirectory[2], myStudentFilename,
-            courseCSVFile[2], courseJSONFile[2], 'IN628: Programming 4')
+          inClassCheckpointsTblOne = {
+            headers: courseAssessment.prog_four_checkpoints_1,
+            rows: [inClassCPRowsOne]
+          }
+          inClassCheckpointsTblTwo = {
+            headers: courseAssessment.prog_four_checkpoints_2,
+            rows: [inClassCPRowsTwo]
+          }
+          assignmentOneTbl = {
+            headers: courseAssessment.markingSchedule,
+            rows: roguelikeAssignment
+          }
+          assignmentTwoTbl = {
+            headers: courseAssessment.markingSchedule,
+            rows: langExplorationAssignment
+          }
+          generate(
+            'Roguelike Assignment',
+            coursePDFDirectory[2],
+            myStudentFilename,
+            courseCSVFile[2],
+            courseJSONFile[2],
+            'IN628: Programming 4'
+          )
           break
         /**
          * IN512: Web 1
@@ -203,9 +261,18 @@ fs.createReadStream(path.join(__dirname, 'csv', csvFilename))
           const webOneCPOne = filterObj(s, /^checkpoint([1-9]|10)$/i)
           markCheckpoint(webOneCPOne, inClassCPRowsOne)
           table = { headers: courseAssessment.web_one, rows: [webOneRow] }
-          inClassCheckpointsTblOne = { headers: courseAssessment.web_one_checkpoints, rows: [inClassCPRowsOne] }
-          generate('Item Review Static Site', coursePDFDirectory[3], myStudentFilename,
-            courseCSVFile[3], courseJSONFile[3], 'IN510: Web 1 - Technology and Development')
+          inClassCheckpointsTblOne = {
+            headers: courseAssessment.web_one_checkpoints,
+            rows: [inClassCPRowsOne]
+          }
+          generate(
+            'Item Review Static Site',
+            coursePDFDirectory[3],
+            myStudentFilename,
+            courseCSVFile[3],
+            courseJSONFile[3],
+            'IN510: Web 1 - Technology and Development'
+          )
           break
         default:
           break
@@ -213,7 +280,10 @@ fs.createReadStream(path.join(__dirname, 'csv', csvFilename))
 
       const studentLastName = studentName.substr(0, studentName.indexOf(' '))
       const studentFirstName = studentName.substr(studentName.indexOf(' ') + 1)
-      const progFourCPFeedback = filterObj(s, /^feedback([1-9]|1[0-9]|2[0-4])$/i)
+      const progFourCPFeedback = filterObj(
+        s,
+        /^feedback([1-9]|1[0-9]|2[0-4])$/i
+      )
 
       pdf = new PDFDocument()
       pdf.pipe(fs.createWriteStream(pdfFile))
@@ -223,7 +293,9 @@ fs.createReadStream(path.join(__dirname, 'csv', csvFilename))
       pdf
         .moveDown(1)
         .fontSize(16)
-        .text(`Name: ${studentFirstName} ${studentLastName} - ${s.studentid}`, { align: 'center' })
+        .text(`Name: ${studentFirstName} ${studentLastName} - ${s.studentid}`, {
+          align: 'center'
+        })
 
       createHeading(1, 13, earth, 'Overall Marks:')
       createTable(black, table, 72, 170, 400, 10)
@@ -237,8 +309,22 @@ fs.createReadStream(path.join(__dirname, 'csv', csvFilename))
           break
         case courseCSVFile[2]:
           createTable(black, inClassCheckpointsTblTwo, 72, 325, 425, 10)
-          createSubheading(1, 10, earth, 'Total: ', black, `You have completed ${s.total} out of 24 in-class checkpoints.`)
-          createSubheading(1, 10, earth, 'Percentage: ', black, `You have gained ${s.practicals}% out of a possible 15.00%.`)
+          createSubheading(
+            1,
+            10,
+            earth,
+            'Total: ',
+            black,
+            `You have completed ${s.total} out of 24 in-class checkpoints.`
+          )
+          createSubheading(
+            1,
+            10,
+            earth,
+            'Percentage: ',
+            black,
+            `You have gained ${s.practicals}% out of a possible 15.00%.`
+          )
           pdf.addPage()
 
           createHeading(0, 13, earth, 'Checkpoint Feedback:')
@@ -247,20 +333,76 @@ fs.createReadStream(path.join(__dirname, 'csv', csvFilename))
 
           createHeading(0, 13, earth, `${assignmentName} Marking Schedule:`)
           createTable(black, assignmentOneTbl, 72, 95, 350, 10)
-          createSubheading(1, 10, earth, 'Percentage: ', black, 'Please refer to the feedback at the end of this document.')
-          createSubheading(1, 10, earth, 'Percentage: ', black, `${s.a1total} (${s.a1grade})`)
-          createSubheading(1, 10, earth, 'Percentage: ', black, `You have gained ${s.assignment1}% out of a possible 45.00%.`)
+          createSubheading(
+            1,
+            10,
+            earth,
+            'Percentage: ',
+            black,
+            'Please refer to the feedback at the end of this document.'
+          )
+          createSubheading(
+            1,
+            10,
+            earth,
+            'Percentage: ',
+            black,
+            `${s.a1total} (${s.a1grade})`
+          )
+          createSubheading(
+            1,
+            10,
+            earth,
+            'Percentage: ',
+            black,
+            `You have gained ${s.assignment1}% out of a possible 45.00%.`
+          )
           pdf.addPage()
 
           createHeading(0, 13, earth, 'Langauge Exploration Marking Schedule:')
           createTable(black, assignmentTwoTbl, 72, 95, 350, 10)
-          createSubheading(2, 10, earth, 'Comments: ', black, 'Please refer to the feedback at the end of this document.')
-          createSubheading(1, 10, earth, 'Grade: ', black, `${s.a2total} (${s.a2grade})`)
-          createSubheading(1, 10, earth, 'Percentage: ', black, `You have gained ${s.assignment2}% out of a possible 25.00%.`)
+          createSubheading(
+            2,
+            10,
+            earth,
+            'Comments: ',
+            black,
+            'Please refer to the feedback at the end of this document.'
+          )
+          createSubheading(
+            1,
+            10,
+            earth,
+            'Grade: ',
+            black,
+            `${s.a2total} (${s.a2grade})`
+          )
+          createSubheading(
+            1,
+            10,
+            earth,
+            'Percentage: ',
+            black,
+            `You have gained ${s.assignment2}% out of a possible 25.00%.`
+          )
           break
         case courseCSVFile[3]:
-          createSubheading(1, 10, earth, 'Total: ', black, `You have completed ${s.total} out of 10 practicals.`)
-          createSubheading(1, 10, earth, 'Percentage: ', black, `You have gained ${s.practicals}% out of a possible 20.00%.`)
+          createSubheading(
+            1,
+            10,
+            earth,
+            'Total: ',
+            black,
+            `You have completed ${s.total} out of 10 practicals.`
+          )
+          createSubheading(
+            1,
+            10,
+            earth,
+            'Percentage: ',
+            black,
+            `You have gained ${s.practicals}% out of a possible 20.00%.`
+          )
           pdf.addPage()
 
           createHeading(0, 13, earth, `${assignmentName} Marking Schedule:`)
@@ -277,12 +419,10 @@ fs.createReadStream(path.join(__dirname, 'csv', csvFilename))
       }
 
       pdf.end()
-      console.log(`Finish PDF generate - ${studentName}.`.red)
+      console.log(`Finish PDF generate - ${studentName}.`.blue)
       pdfs.push(pdf)
     })
   })
   .on('end', () => {
-    console.log('PDF generate complete.'.blue)
+    console.log('PDF generate complete.'.green)
   })
-  
-

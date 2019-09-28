@@ -24,23 +24,9 @@
     "web-one-pdf"
   ],
   "courseAssessment": {
-    "markingSchedule": [
-      "Component",
-      "Weight",
-      "Score"
-    ],
-    "mobile": [
-      "Practicals",
-      "Project",
-      "Exam",
-      "Overall Grade"
-    ],
-    "oosd": [
-      "Practicals",
-      "Project",
-      "Exam",
-      "Overall Grade"
-    ],
+    "markingSchedule": ["Component", "Weight", "Score"],
+    "mobile": ["Practicals", "Project", "Exam", "Overall Grade"],
+    "oosd": ["Practicals", "Project", "Exam", "Overall Grade"],
     "web_one": [
       "Practicals",
       "Project 1",
