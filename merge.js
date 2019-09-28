@@ -5,7 +5,7 @@
 
 const PDFMerge = require('pdfmerge')
 const data = require('./data.json')
-const colors = require('colors')
+require('colors')
 
 let courseDir
 let interval = 1500
@@ -34,13 +34,15 @@ jsonPath.forEach((d, idx) => {
    * Merge PDF files every 1.5 seconds
    */
   setTimeout(_ => {
-    console.log(colors.green(`Start PDF merge - ${studentname}.`))
+    console.log(`Start PDF merge - ${studentname}.`.green)
     PDFMerge(
-      [`./pdf/${courseDir}/results-${githubname}.pdf`,
-      `./pdf/${courseDir}/roguelike/roguelike-${githubname}.pdf`],
+      [
+        `./pdf/${courseDir}/results-${githubname}.pdf`,
+        `./pdf/${courseDir}/roguelike/roguelike-${githubname}.pdf`
+      ],
       `./pdf/${courseDir}/final/final-results-${githubname}.pdf`
     )
-      .then(_ => console.log(colors.red(`Finish PDF merge - ${studentname}.`)))
+      .then(_ => console.log(`Finish PDF merge - ${studentname}.`.blue))
       .catch(err => console.log(err))
   }, idx * interval)
 })

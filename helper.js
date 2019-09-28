@@ -26,7 +26,7 @@ const createDir = myPath => {
  * @param {string} myOtherFile
  */
 const fileExists = (myCourseFile, myOtherFile) => {
-  return (myCourseFile.indexOf(myOtherFile) > -1) ? true : false
+  return myCourseFile.indexOf(myOtherFile) > -1 ? true : false
 }
 
 /**
