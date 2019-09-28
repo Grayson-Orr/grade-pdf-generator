@@ -3,25 +3,27 @@
  * @author [Grayson Orr](https://github.com/grayson-orr)
  */
 
-const path = require('path')
 const {
   createDir,
   fileExists,
   createPDF,
+  createZIP,
+  createJSON,
   markCheckpoint,
-  filterObj
+  filterObj,
+  pdfQuestion
 } = require('../helper')
 
 /**
  * Testing data
  */
-const dirName = '/Users/graysonorr/Desktop/grade-pdf-generator'
 const csvFiles = [
   'mobile-grades.csv',
   'oosd-grades.csv',
   'prog-four-grades.csv',
   'web-one-grades.csv'
 ]
+
 const studentObj = {
   studentname: 'Orr Grayson',
   studentlogin: 'ORRGl1',
@@ -38,36 +40,54 @@ const studentObj = {
   checkpoint10: '1',
   total: '7'
 }
+
 const filteredArr = filterObj(studentObj, /^checkpoint([1-9]|10)$/i)
 
 describe('createDir', () => {
-  test('should return a csv directory path', async () => {
-    const csvPath = await createDir(path.join(dirName, 'pdf'))
-    expect(csvPath).toEqual(`${dirName}/pdf`)
+  test('should return a csv directory', () => {
+    const csvPath = createDir('csv')
+    expect(csvPath).toEqual('csv')
+  })
+
+  test('should return an error creating a pdf directory', () => {
+    const pdfPath = createDir('//pdf')
+    expect(pdfPath).toEqual(new Error('Error creating directory.'))
   })
 })
 
 describe('fileExists', () => {
-  test('should return a CSV file that exists', async () => {
-    const csvDoesntExist = await fileExists(csvFiles, 'oosd-grades.csv')
+  test('should return a CSV file that exists', () => {
+    const csvDoesntExist = fileExists(csvFiles, 'oosd-grades.csv')
     expect(csvDoesntExist).toEqual(true)
   })
 
-  test("should return a CSV file that doesn't exists", async () => {
-    const csvDoesntExist = await fileExists(csvFiles, 'mobile.csv')
+  test("should return a CSV file that doesn't exists", () => {
+    const csvDoesntExist = fileExists(csvFiles, 'mobile.csv')
     expect(csvDoesntExist).toEqual(false)
   })
 })
 
 describe('createPDF', () => {
-  test('should return a PDF file path', async () => {
-    const pdfPath = await createPDF(
-      'pdf/prog-four-pdf',
-      'results-grayson-orr.pdf'
+  test('should return a PDF file path', () => {
+    const pdfPath = createPDF('pdf/prog-four-pdf', 'results-grayson-orr.pdf')
+    expect(pdfPath).toEqual('pdf/prog-four-pdf/results-grayson-orr.pdf')
+  })
+})
+
+describe('createJSON', () => {
+  test('should return a JSON file path', () => {
+    const jsonPath = createJSON(
+      'csv/prog-four-grades.csv',
+      'json/prog-four-grades.json'
     )
-    expect(pdfPath).toEqual(
-      `${dirName}/pdf/prog-four-pdf/results-grayson-orr.pdf`
-    )
+    expect(jsonPath).toEqual('json/prog-four-grades.json')
+  })
+})
+
+describe('createZIP', () => {
+  test('should return a ZIP directory path', () => {
+    const zipPath = createZIP('pdf/prog-four-pdf', 'zip/prog-four-pdf.zip')
+    expect(zipPath).toEqual('zip/prog-four-pdf.zip')
   })
 })
 
@@ -94,4 +114,8 @@ describe('markCheckpoint', () => {
     const result = await markCheckpoint(filteredArr, checkpointArr)
     expect(result).toEqual(['Y', 'N', 'Y', 'N', 'Y', 'Y', 'Y', 'N', 'Y', 'Y'])
   })
+})
+
+describe('pdfQuestion', () => {
+  test('should return an object', () => {})
 })

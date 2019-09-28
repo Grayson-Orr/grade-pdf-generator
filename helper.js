@@ -15,7 +15,6 @@ const createDir = myPath => {
   try {
     if (!fs.existsSync(myPath)) fs.mkdirSync(myPath)
   } catch (err) {
-    console.error(err)
     return new Error('Error creating directory.')
   }
   return myPath
@@ -32,10 +31,9 @@ const fileExists = (myCourseFile, myOtherFile) => {
 /**
  * @param {string} myPath
  * @param {string} myFilename
- * @return {string}
  */
 const createPDF = (myPath, myFilename) => {
-  return path.join(__dirname, myPath, myFilename)
+  return path.join(myPath, myFilename)
 }
 
 /**
@@ -50,6 +48,7 @@ const createZIP = (myPath, myZIPName) => {
       zipped.save(myZIPName)
     }
   })
+  return myZIPName
 }
 
 /**
@@ -59,12 +58,12 @@ const createZIP = (myPath, myZIPName) => {
 const createJSON = (myInput, myOutput) => {
   csvToJson.generateJsonFileFromCsv(myInput, myOutput)
   csvToJson.fieldDelimiter(',')
+  return myOutput
 }
 
 /**
  * @param {object} myCPArr
  * @param {object} myCPRowArr
- * @return myCPRowArr
  */
 const markCheckpoint = (myCPArr, myCPRowArr) => {
   myCPArr.forEach(p =>
@@ -76,7 +75,6 @@ const markCheckpoint = (myCPArr, myCPRowArr) => {
 /**
  * @param {object} myObj
  * @param {object} myRegExp
- * @return {object}
  */
 const filterObj = (myObj, myRegExp) => {
   return Object.keys(myObj)
