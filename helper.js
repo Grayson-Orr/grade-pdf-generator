@@ -7,6 +7,8 @@ const path = require('path')
 const fs = require('fs')
 const zipper = require('zip-local')
 const csvToJson = require('convert-csv-to-json')
+const { exec } = require('shelljs')
+const { prompt } = require('inquirer')
 
 /**
  * @param {string} myPath
@@ -31,7 +33,6 @@ const fileExists = (myCourseFile, myOtherFile) => {
 /**
  * @param {string} myPath
  * @param {string} myFilename
- * @return {string}
  */
 const createPDF = (myPath, myFilename) => {
   return path.join(myPath, myFilename)
@@ -59,14 +60,12 @@ const createZIP = (myPath, myZIPName) => {
 const createJSON = (myInput, myOutput) => {
   csvToJson.generateJsonFileFromCsv(myInput, myOutput)
   csvToJson.fieldDelimiter(',')
-  console.log(myInput, myOutput)
   return myOutput
 }
 
 /**
  * @param {object} myCPArr
  * @param {object} myCPRowArr
- * @return myCPRowArr
  */
 const markCheckpoint = (myCPArr, myCPRowArr) => {
   myCPArr.forEach(p =>
@@ -78,12 +77,44 @@ const markCheckpoint = (myCPArr, myCPRowArr) => {
 /**
  * @param {object} myObj
  * @param {object} myRegExp
- * @return {object}
  */
 const filterObj = (myObj, myRegExp) => {
   return Object.keys(myObj)
     .filter(value => myRegExp.test(value))
     .map(e => myObj[e])
+}
+
+/**
+ * @param {*} myInput 
+ * @param {*} myMsg 
+ * @param {*} myFileArr 
+ * @param {*} myEmptyMsg 
+ * @param {*} myNotExistMsg 
+ */
+const pdfQuestion = (myInput, myMsg, myFileArr, myEmptyMsg, myNotExistMsg) => {
+  return {
+    type: myInput,
+    name: 'filename',
+    message: myMsg,
+    validate: val => {
+      return val === ''
+        ? myEmptyMsg
+        : !fileExists(myFileArr, val)
+        ? myNotExistMsg
+        : true
+    }
+  }
+}
+
+/**
+ * @param {*} myQuestion 
+ * @param {*} myScript 
+ */
+const questionPrompt = (myQuestion, myScript) => {
+  prompt(myQuestion).then(ans => {
+    const { filename } = ans
+    exec(`node ${myScript} ${filename}`)
+  })
 }
 
 module.exports = {
@@ -93,5 +124,7 @@ module.exports = {
   createZIP,
   createJSON,
   markCheckpoint,
-  filterObj
+  filterObj,
+  pdfQuestion,
+  questionPrompt
 }

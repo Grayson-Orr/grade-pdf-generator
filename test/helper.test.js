@@ -3,7 +3,6 @@
  * @author [Grayson Orr](https://github.com/grayson-orr)
  */
 
-const path = require('path')
 const {
   createDir,
   fileExists,
@@ -11,7 +10,8 @@ const {
   createZIP,
   createJSON,
   markCheckpoint,
-  filterObj
+  filterObj,
+  pdfQuestion
 } = require('../helper')
 
 /**
@@ -23,6 +23,7 @@ const csvFiles = [
   'prog-four-grades.csv',
   'web-one-grades.csv'
 ]
+
 const studentObj = {
   studentname: 'Orr Grayson',
   studentlogin: 'ORRGl1',
@@ -39,6 +40,7 @@ const studentObj = {
   checkpoint10: '1',
   total: '7'
 }
+
 const filteredArr = filterObj(studentObj, /^checkpoint([1-9]|10)$/i)
 
 describe('createDir', () => {
@@ -72,17 +74,20 @@ describe('createPDF', () => {
   })
 })
 
+describe('createJSON', () => {
+  test('should return a JSON file path', () => {
+    const jsonPath = createJSON(
+      'csv/prog-four-grades.csv',
+      'json/prog-four-grades.json'
+    )
+    expect(jsonPath).toEqual('json/prog-four-grades.json')
+  })
+})
+
 describe('createZIP', () => {
   test('should return a ZIP directory path', () => {
     const zipPath = createZIP('pdf/prog-four-pdf', 'zip/prog-four-pdf.zip')
     expect(zipPath).toEqual('zip/prog-four-pdf.zip')
-  })
-})
-
-describe('createJSON', () => {
-  test('should return a JSON file path', () => {
-    const jsonPath = createJSON('csv/prog-four-grades.csv', 'json/prog-four-grades.json')
-    expect(jsonPath).toEqual('json/prog-four-grades.json')
   })
 })
 
@@ -109,4 +114,8 @@ describe('markCheckpoint', () => {
     const result = await markCheckpoint(filteredArr, checkpointArr)
     expect(result).toEqual(['Y', 'N', 'Y', 'N', 'Y', 'Y', 'Y', 'N', 'Y', 'Y'])
   })
+})
+
+describe('pdfQuestion', () => {
+  test('should return an object', () => {})
 })

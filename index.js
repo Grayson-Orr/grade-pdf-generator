@@ -7,7 +7,7 @@ const { exec } = require('shelljs')
 const { prompt } = require('inquirer')
 require('colors')
 
-const { fileExists } = require('./helper')
+const { pdfQuestion, questionPrompt } = require('./helper')
 const data = require('./data.json')
 const { courseCSVFile, courseJSONFile } = data
 
@@ -16,28 +16,6 @@ const initialQuestion = {
   name: 'pdfCommand',
   message: 'Choose one of the following PDF commands:',
   choices: ['generate', 'merge', 'send']
-}
-
-const pdfQuestion = (
-  myInput,
-  myName,
-  myMsg,
-  myFileArr,
-  myEmptyMsg,
-  myNotExistMsg
-) => {
-  return {
-    type: myInput,
-    name: myName,
-    message: myMsg,
-    validate: val => {
-      return val === ''
-        ? myEmptyMsg
-        : !fileExists(myFileArr, val)
-        ? myNotExistMsg
-        : true
-    }
-  }
 }
 
 exec('clear')
@@ -49,7 +27,6 @@ prompt(initialQuestion).then(ans => {
 
   const csvQuestion = pdfQuestion(
     'input',
-    'csvFilename',
     'Enter a CSV filename:',
     courseCSVFile,
     'CSV filename can not be empty. Please enter a CSV filename. For example, <filename>.csv'
@@ -60,7 +37,6 @@ prompt(initialQuestion).then(ans => {
 
   const jsonQuestion = pdfQuestion(
     'input',
-    'jsonFilename',
     'Enter a JSON filename:',
     courseJSONFile,
     'JSON filename can not be empty. Please enter a JSON filename. For example, <filename>.json'
@@ -71,22 +47,14 @@ prompt(initialQuestion).then(ans => {
 
   switch (pdfCommand) {
     case 'generate':
-      prompt(csvQuestion).then(generateAns => {
-        const { csvFilename } = generateAns
-        exec(`node generate.js ${csvFilename}`)
-      })
+      console.log(csvQuestion)
+      questionPrompt(csvQuestion, 'generate.js')
       break
     case 'merge':
-      prompt(jsonQuestion).then(mergeAns => {
-        const { jsonFilename } = mergeAns
-        exec(`node merge.js ${jsonFilename}`)
-      })
+      questionPrompt(jsonQuestion, 'merge.js')
       break
     case 'send':
-      prompt(jsonQuestion).then(sendAns => {
-        const { jsonFilename } = sendAns
-        exec(`node send.js ${jsonFilename}`)
-      })
+      questionPrompt(jsonQuestion, 'send.js')
       break
     default:
       break
