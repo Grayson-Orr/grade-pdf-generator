@@ -7,7 +7,7 @@ const { exec } = require('shelljs')
 const { prompt } = require('inquirer')
 require('colors')
 
-const { pdfQuestion, questionPrompt } = require('./helper')
+const { fileExists } = require('./helper')
 const data = require('./data.json')
 const { courseCSVFile, courseJSONFile } = data
 
@@ -18,6 +18,38 @@ const initialQuestion = {
   choices: ['generate', 'merge', 'send']
 }
 
+/**
+ * @param {*} myMsg 
+ * @param {*} myFileArr 
+ * @param {*} myEmptyMsg 
+ * @param {*} myNotExistMsg 
+ */
+const pdfQuestion = (myMsg, myFileArr, myEmptyMsg, myNotExistMsg) => {
+  return {
+    type: 'input',
+    name: 'filename',
+    message: myMsg,
+    validate: val => {
+      return val === ''
+        ? myEmptyMsg
+        : !fileExists(myFileArr, val)
+        ? myNotExistMsg
+        : true
+    }
+  }
+}
+
+/**
+ * @param {*} myQuestion
+ * @param {*} myScript
+ */
+const questionPrompt = (myQuestion, myScript) => {
+  prompt(myQuestion).then(ans => {
+    const { filename } = ans
+    exec(`node ${myScript} ${filename}`)
+  })
+}
+
 exec('clear')
 
 console.log('PDF Command Script\n'.blue.bold)
@@ -26,7 +58,6 @@ prompt(initialQuestion).then(ans => {
   const { pdfCommand } = ans
 
   const csvQuestion = pdfQuestion(
-    'input',
     'Enter a CSV filename:',
     courseCSVFile,
     'CSV filename can not be empty. Please enter a CSV filename. For example, <filename>.csv'
@@ -36,7 +67,6 @@ prompt(initialQuestion).then(ans => {
   )
 
   const jsonQuestion = pdfQuestion(
-    'input',
     'Enter a JSON filename:',
     courseJSONFile,
     'JSON filename can not be empty. Please enter a JSON filename. For example, <filename>.json'
@@ -47,7 +77,6 @@ prompt(initialQuestion).then(ans => {
 
   switch (pdfCommand) {
     case 'generate':
-      console.log(csvQuestion)
       questionPrompt(csvQuestion, 'generate.js')
       break
     case 'merge':
