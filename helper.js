@@ -35,7 +35,7 @@ const fileExists = (myCourseFile, myOtherFile) => {
  * @return {string}
  */
 const createPDF = (myPath, myFilename) => {
-  return path.join(__dirname, myPath, myFilename)
+  return path.join(myPath, myFilename)
 }
 
 /**

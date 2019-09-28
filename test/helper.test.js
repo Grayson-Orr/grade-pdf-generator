@@ -42,8 +42,8 @@ const filteredArr = filterObj(studentObj, /^checkpoint([1-9]|10)$/i)
 
 describe('createDir', () => {
   test('should return a csv directory path', async () => {
-    const csvPath = await createDir(path.join(dirName, 'pdf'))
-    expect(csvPath).toEqual(`${dirName}/pdf`)
+    const csvPath = await createDir(path.join('csv'))
+    expect(csvPath).toEqual('csv')
   })
 })
 
@@ -65,9 +65,7 @@ describe('createPDF', () => {
       'pdf/prog-four-pdf',
       'results-grayson-orr.pdf'
     )
-    expect(pdfPath).toEqual(
-      `${dirName}/pdf/prog-four-pdf/results-grayson-orr.pdf`
-    )
+    expect(pdfPath).toEqual('pdf/prog-four-pdf/results-grayson-orr.pdf')
   })
 })
 

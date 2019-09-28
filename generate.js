@@ -37,10 +37,6 @@ let {
 
 const pdfs = []
 const csvFilename = process.argv[2]
-const csvDirName = path.join(__dirname, 'csv')
-const pdfDirName = path.join(__dirname, 'pdf')
-const zipDirName = path.join(__dirname, 'zip')
-const jsonDirName = path.join(__dirname, 'json')
 const txtColor = { black: '#000000', earth: '#0000A0' }
 
 /**
@@ -60,12 +56,12 @@ const generate = (
   myCourseName
 ) => {
   assignmentName = myAssignmentName
-  createDir(path.join(__dirname, 'pdf', myPDFDir))
+  createDir(path.join('pdf', myPDFDir))
   pdfFile = createPDF(`pdf/${myPDFDir}`, myStudentFilename)
   createZIP(`pdf/${myPDFDir}`, `zip/${myPDFDir}.zip`)
   createJSON(
-    path.join(__dirname, 'csv', myCSVFilename),
-    `${jsonDirName}/${myJSONFilename}`
+    path.join('csv', myCSVFilename),
+    `json/${myJSONFilename}`
   )
   courseName = myCourseName
 }
@@ -152,10 +148,10 @@ const createFeedback = (myArr, myColor, myContColor) => {
 /**
  * Create a csv, json, pdf and zip directory
  */
-createDir(csvDirName)
-createDir(jsonDirName)
-createDir(pdfDirName)
-createDir(zipDirName)
+createDir('csv')
+createDir('json')
+createDir('pdf')
+createDir('zip')
 
 fs.createReadStream(path.join(__dirname, 'csv', csvFilename))
   .pipe(csv())
