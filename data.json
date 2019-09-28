@@ -1,0 +1,98 @@
+{
+  "courseName": [
+    "IN: Mobile Application Development",
+    "IN710: Object-Oriented Systems Development",
+    "IN628 Programming 4",
+    "IN512: Web 1"
+  ],
+  "courseCSVFile": [
+    "mobile-grades.csv",
+    "oosd-grades.csv",
+    "prog-four-grades.csv",
+    "web-one-grades.csv"
+  ],
+  "courseJSONFile": [
+    "mobile-grades.json",
+    "oosd-grades.json",
+    "prog-four-grades.json",
+    "web-one-grades.json"
+  ],
+  "coursePDFDirectory": [
+    "mobile-pdf",
+    "oosd-pdf",
+    "prog-four-pdf",
+    "web-one-pdf"
+  ],
+  "courseAssessment": {
+    "markingSchedule": [
+      "Component",
+      "Weight",
+      "Score"
+    ],
+    "mobile": [
+      "Practicals",
+      "Project",
+      "Exam",
+      "Overall Grade"
+    ],
+    "oosd": [
+      "Practicals",
+      "Project",
+      "Exam",
+      "Overall Grade"
+    ],
+    "web_one": [
+      "Practicals",
+      "Project 1",
+      "Project 2",
+      "Skills-Based",
+      "Overall Grade"
+    ],
+    "prog_four": [
+      "In Class Checkpoints",
+      "Software Projects",
+      "Theory Exam",
+      "Overall Grade"
+    ],
+    "prog_four_checkpoints_1": [
+      "CP 1",
+      "CP 2",
+      "CP 3",
+      "CP 4",
+      "CP 5",
+      "CP 6",
+      "CP 7",
+      "CP 8",
+      "CP 9",
+      "CP 10",
+      "CP 11",
+      "CP 12",
+      "CP 13"
+    ],
+    "prog_four_checkpoints_2": [
+      "CP 14",
+      "CP 15",
+      "CP 16",
+      "CP 17",
+      "CP 18",
+      "CP 19",
+      "CP 20",
+      "CP 21",
+      "CP 22",
+      "CP 23",
+      "CP 24"
+    ],
+    "web_one_checkpoints": [
+      "CP 1",
+      "CP 2",
+      "CP 3",
+      "CP 4",
+      "CP 5",
+      "CP 6",
+      "CP 7",
+      "CP 8",
+      "CP 9",
+      "CP 10"
+    ]
+  }
+}
