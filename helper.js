@@ -15,7 +15,6 @@ const createDir = myPath => {
   try {
     if (!fs.existsSync(myPath)) fs.mkdirSync(myPath)
   } catch (err) {
-    console.error(err)
     return new Error('Error creating directory.')
   }
   return myPath
@@ -50,6 +49,7 @@ const createZIP = (myPath, myZIPName) => {
       zipped.save(myZIPName)
     }
   })
+  return myZIPName
 }
 
 /**
@@ -59,6 +59,8 @@ const createZIP = (myPath, myZIPName) => {
 const createJSON = (myInput, myOutput) => {
   csvToJson.generateJsonFileFromCsv(myInput, myOutput)
   csvToJson.fieldDelimiter(',')
+  console.log(myInput, myOutput)
+  return myOutput
 }
 
 /**

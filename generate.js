@@ -59,10 +59,7 @@ const generate = (
   createDir(path.join('pdf', myPDFDir))
   pdfFile = createPDF(`pdf/${myPDFDir}`, myStudentFilename)
   createZIP(`pdf/${myPDFDir}`, `zip/${myPDFDir}.zip`)
-  createJSON(
-    path.join('csv', myCSVFilename),
-    `json/${myJSONFilename}`
-  )
+  createJSON(path.join('csv', myCSVFilename), `json/${myJSONFilename}`)
   courseName = myCourseName
 }
 
