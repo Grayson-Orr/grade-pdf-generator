@@ -10,8 +10,7 @@ const {
   createZIP,
   createJSON,
   markCheckpoint,
-  filterObj,
-  pdfQuestion
+  filterObj
 } = require('../helper')
 
 /**

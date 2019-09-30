@@ -4,7 +4,7 @@
  */
 
 const PDFDocument = require('./pdf-tables')
-const fs = require('fs')
+const { createReadStream, createWriteStream } = require('fs')
 const path = require('path')
 const csv = require('csv-parser')
 require('colors')
@@ -150,7 +150,7 @@ createDir('json')
 createDir('pdf')
 createDir('zip')
 
-fs.createReadStream(path.join(__dirname, 'csv', csvFilename))
+createReadStream(path.join(__dirname, 'csv', csvFilename))
   .pipe(csv())
   .on('data', data => {
     const { black, earth } = txtColor
@@ -279,7 +279,7 @@ fs.createReadStream(path.join(__dirname, 'csv', csvFilename))
       )
 
       pdf = new PDFDocument()
-      pdf.pipe(fs.createWriteStream(pdfFile))
+      pdf.pipe(createWriteStream(pdfFile))
       pdf.font('./public/font/calibril.ttf')
       pdf.image('./public/img/op-logo.png', 50, 25, { width: 100, height: 50 })
       pdf.fontSize(16).text(courseName, { align: 'center' })
