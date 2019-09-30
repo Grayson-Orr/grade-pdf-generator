@@ -19,10 +19,10 @@ const initialQuestion = {
 }
 
 /**
- * @param {*} myMsg 
- * @param {*} myFileArr 
- * @param {*} myEmptyMsg 
- * @param {*} myNotExistMsg 
+ * @param {string} myMsg 
+ * @param {object} myFileArr 
+ * @param {string} myEmptyMsg 
+ * @param {string} myNotExistMsg 
  */
 const pdfQuestion = (myMsg, myFileArr, myEmptyMsg, myNotExistMsg) => {
   return {
@@ -40,8 +40,8 @@ const pdfQuestion = (myMsg, myFileArr, myEmptyMsg, myNotExistMsg) => {
 }
 
 /**
- * @param {*} myQuestion
- * @param {*} myScript
+ * @param {object} myQuestion
+ * @param {string} myScript
  */
 const questionPrompt = (myQuestion, myScript) => {
   prompt(myQuestion).then(ans => {
