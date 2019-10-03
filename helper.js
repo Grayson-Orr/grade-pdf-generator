@@ -1,10 +1,10 @@
 /**
- * @version 1.0
+ * @version 0.5.0
  * @author [Grayson Orr](https://github.com/grayson-orr)
  */
 
 const path = require('path')
-const fs = require('fs')
+const { existsSync, mkdirSync } = require('fs')
 const zipper = require('zip-local')
 const csvToJson = require('convert-csv-to-json')
 
@@ -13,7 +13,7 @@ const csvToJson = require('convert-csv-to-json')
  */
 const createDir = myPath => {
   try {
-    if (!fs.existsSync(myPath)) fs.mkdirSync(myPath)
+    if (!existsSync(myPath)) mkdirSync(myPath)
   } catch (err) {
     return new Error('Error creating directory.')
   }
