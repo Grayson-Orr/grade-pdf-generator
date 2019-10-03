@@ -1,5 +1,5 @@
 /**
- * @version 1.0
+ * @version 0.5.0
  * @author [Grayson Orr](https://github.com/grayson-orr)
  */
 
@@ -19,10 +19,10 @@ const initialQuestion = {
 }
 
 /**
- * @param {string} myMsg 
- * @param {object} myFileArr 
- * @param {string} myEmptyMsg 
- * @param {string} myNotExistMsg 
+ * @param {string} myMsg
+ * @param {object} myFileArr
+ * @param {string} myEmptyMsg
+ * @param {string} myNotExistMsg
  */
 const pdfQuestion = (myMsg, myFileArr, myEmptyMsg, myNotExistMsg) => {
   return {
