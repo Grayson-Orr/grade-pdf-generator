@@ -7,5 +7,5 @@ const { exec } = require('shelljs')
 const cron = require('node-cron')
 
 cron.schedule('* * * * *', () => {
-  exec(`node generate.js prog-four-grades.csv`)
+  exec(`cd dropbox;python dropbox_upload.py`)
 })
