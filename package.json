@@ -22,6 +22,7 @@
     "fs": "0.0.1-security",
     "inquirer": "^7.0.0",
     "jest": "^24.9.0",
+    "node-cron": "^2.0.3",
     "nodejs-nodemailer-outlook": "^1.2.1",
     "pdfkit": "^0.9.1",
     "pdfmerge": "^1.0.2",
