@@ -34,7 +34,7 @@ jsonPath.forEach((d, idx) => {
    * Merge PDF files every 1.5 seconds
    */
   setTimeout(_ => {
-    console.log(`Start PDF merge - ${studentname}.`.green)
+    console.log(`Merging PDF files for ${studentname}.`.green)
     PDFMerge(
       [
         `./pdf/${courseDir}/results-${githubname}.pdf`,
@@ -42,7 +42,7 @@ jsonPath.forEach((d, idx) => {
       ],
       `./pdf/${courseDir}/final/final-results-${githubname}.pdf`
     )
-      .then(_ => console.log(`Finish PDF merge - ${studentname}.`.blue))
+      .then(_ => console.log(`PDF files merged for ${studentname}.`.blue))
       .catch(err => console.log(err))
   }, idx * interval)
 })

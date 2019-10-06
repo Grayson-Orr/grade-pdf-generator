@@ -43,7 +43,7 @@ jsonPath.forEach((d, idx) => {
    * Send an email every 7 seconds
    */
   setTimeout(_ => {
-    console.log(`Start PDF sent - ${studentname}.`.green)
+    console.log(`Emailing PDF file to ${studentname}.`.green)
     nodeoutlook.sendEmail({
       auth: {
         user: email,
@@ -60,7 +60,7 @@ jsonPath.forEach((d, idx) => {
       ],
       onError: err => console.log(err),
       onSuccess: _ => {
-        console.log(`Finish PDF sent - ${studentname}.`.blue)
+        console.log(`PDF file emailed to ${studentname}.`.blue)
       }
     })
   }, idx * interval)

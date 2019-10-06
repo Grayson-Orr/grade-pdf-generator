@@ -158,7 +158,7 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
     students.push(data)
     students.forEach(s => {
       const studentName = s.studentname
-      console.log(`Start PDF generate - ${studentName}.`.green)
+      console.log(`Generating PDF file for ${studentName}.`.green)
 
       const inClassCPRowsOne = []
       const inClassCPRowsTwo = []
@@ -417,10 +417,10 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
       }
 
       pdf.end()
-      console.log(`Finish PDF generate - ${studentName}.`.blue)
+      console.log(`PDF file generated for ${studentName}.`.blue)
       pdfs.push(pdf)
     })
   })
   .on('end', () => {
-    console.log('PDF generate complete.'.green)
+    console.log('Complete.'.green)
   })

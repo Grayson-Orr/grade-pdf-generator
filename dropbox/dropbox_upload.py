@@ -1,6 +1,7 @@
 import os
 import json
 import dropbox
+from termcolor import colored
 
 files = []
 access_token = ''
@@ -22,8 +23,9 @@ class DropboxUpload():
 
     def upload_multiple_files(self):
         for f in files:
-            print(f)
+            print(colored('Uploading PDF file to Dropbox.', 'green'))
             self.upload_single_file(f'{self.my_path}/{f}', f'/{f}')
+            print(colored('PDF file uploaded to Dropbox.', 'blue'))
 
 
 def main():
