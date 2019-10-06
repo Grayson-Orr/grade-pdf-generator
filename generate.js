@@ -173,7 +173,13 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
         `${s.overall} (${s.grade})`
       ]
 
-      const webOneRow = [`${s.practicals}%`]
+      const webOneRow = [
+        `${s.practicals}%`,
+        `${s.assignment1}%`,
+        `${s.sba}%`,
+        `${s.assignment2}%`,
+        `${s.overall} (${s.grade})`
+      ]
 
       /**
        * Marking schedules
@@ -401,11 +407,10 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
           createHeading(0, 13, earth, `${assignmentName} Marking Schedule:`)
           pdf.addPage()
 
-          createHeading(0, 13, earth, 'Skills-Based Marking Schedule:')
+          createHeading(0, 13, earth, 'SBA Marking Schedule:')
           pdf.addPage()
 
           createHeading(0, 13, earth, 'Project Marking Schedule:')
-          pdf.addPage()
           break
         default:
           break

@@ -27,17 +27,17 @@
     "markingSchedule": ["Component", "Weight", "Score"],
     "mobile": ["Practicals", "Project", "Exam", "Overall Grade"],
     "oosd": ["Practicals", "Project", "Exam", "Overall Grade"],
-    "web_one": [
-      "Practicals",
-      "Project 1",
-      "Project 2",
-      "Skills-Based",
-      "Overall Grade"
-    ],
     "prog_four": [
       "In Class Checkpoints",
       "Software Projects",
       "Theory Exam",
+      "Overall Grade"
+    ],
+    "web_one": [
+      "Checkpoints",
+      "Assignment",
+      "SBA",
+      "Project",
       "Overall Grade"
     ],
     "prog_four_checkpoints_1": [
