@@ -1,1 +1,1 @@
-worker: node cron.js
+worker: python3 dropbox_upload.py
