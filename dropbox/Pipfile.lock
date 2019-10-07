@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "6ed571b30132b9ac65b412de7fed07b500acf4c9062eecaa0291eb3a616ba8f2"
+            "sha256": "c5e3a8bc8101b3a5e738cab441817e5477cad98fb2eaeccf3142923f86a10dec"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -43,13 +43,6 @@
                 "sha256:ea8b7f6188e6fa117537c3df7da9fc686d485087abf6ac197f9c46432f7e4a3c"
             ],
             "version": "==2.8"
-        },
-        "pycron": {
-            "hashes": [
-                "sha256:900f5bcb8fbf56826c02872382c41c6c2ed1f0b2fb6af3ce0a81ec203a6858fe"
-            ],
-            "index": "pypi",
-            "version": "==1.0.0"
         },
         "requests": {
             "hashes": [

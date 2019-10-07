@@ -2,7 +2,6 @@ import os
 import time
 import json
 import dropbox
-import pycron
 
 files = []
 access_token = ''
@@ -28,17 +27,14 @@ class DropboxUpload():
 
 
 def main():
-    with open('./config.json') as f:
+    with open('../config.json') as f:
         json_obj = json.load(f)
         access_token = json_obj['dropbox-access-token']
-    pdf_files_path = './pdf/prog-four-pdf/final'
+    pdf_files_path = '../pdf/prog-four-pdf/final'
     drpbx_upld = DropboxUpload(access_token, pdf_files_path)
     drpbx_upld.append_file(files)
     drpbx_upld.upload_multiple_files()
 
 
 if __name__ == '__main__':
-    while True:
-        if pycron.is_now('* * * * *'):
-            main()
-        time.sleep(60)
+    main()
