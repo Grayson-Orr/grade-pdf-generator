@@ -1,8 +1,12 @@
+#!/usr/bin/env python
+
 import os
-import time
 import json
 import dropbox
+import logging
 
+logging.basicConfig(filename='dropbox_upload.log', level=logging.INFO,
+                    format='%(asctime)s:%(levelname)s:%(name)s:%(message)s')
 files = []
 access_token = ''
 
@@ -23,7 +27,9 @@ class DropboxUpload():
 
     def upload_multiple_files(self):
         for f in files:
-            self.upload_single_file(self.my_path + '/' + f, '/' + f)
+            logging.info(f'Uploading {f} to Dropbox.')
+            self.upload_single_file(f'{self.my_path}/{f}', f'/{f}')
+            logging.info(f'{f} uploaded to Dropbox.')
 
 
 def main():
