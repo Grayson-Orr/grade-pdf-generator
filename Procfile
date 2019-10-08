@@ -1,1 +1,1 @@
-worker: dropbox_upload.js
+worker: node dropbox_upload.js
