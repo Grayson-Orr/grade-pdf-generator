@@ -13,7 +13,7 @@ const jsonFilename = process.argv[2]
 const jsonPath = require(`./json/${jsonFilename}`)
 const { courseJSONFile, coursePDFDirectory } = data
 
-jsonPath.forEach((d, idx) => {
+jsonPath.map((d, idx) => {
   const { githubname, studentname } = d
 
   switch (jsonFilename) {

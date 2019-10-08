@@ -156,7 +156,7 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
     const { black, earth } = txtColor
     students = []
     students.push(data)
-    students.forEach(s => {
+    students.map(s => {
       const studentName = s.studentname
       console.log(`Generating PDF file for ${studentName}.`.green)
 

@@ -36,7 +36,7 @@ class PDFDocumentWithTables extends PDFDocument {
     const computeRowHeight = row => {
       let result = 0
 
-      row.forEach(cell => {
+      row.map(cell => {
         const cellHeight = this.heightOfString(cell, {
           width: columnWidth,
           align: 'left'
@@ -62,7 +62,7 @@ class PDFDocumentWithTables extends PDFDocument {
 
     if (startY + 3 * computeRowHeight(table.headers) > maxY) this.addPage()
 
-    table.headers.forEach((header, i) => {
+    table.headers.map((header, i) => {
       this.text(header, startX + i * columnContainerWidth, startY, {
         width: columnWidth,
         align: 'left'
@@ -76,7 +76,7 @@ class PDFDocumentWithTables extends PDFDocument {
       .lineWidth(2)
       .stroke()
 
-    table.rows.forEach((row, i) => {
+    table.rows.map((row, i) => {
       const rowHeight = computeRowHeight(row)
 
       if (startY + 3 * rowHeight < maxY) startY = rowBottomY + rowSpacing
@@ -84,7 +84,7 @@ class PDFDocumentWithTables extends PDFDocument {
 
       prepareRow(row, i)
 
-      row.forEach((cell, i) => {
+      row.map((cell, i) => {
         this.text(cell, startX + i * columnContainerWidth, startY, {
           width: columnWidth,
           align: 'left'
