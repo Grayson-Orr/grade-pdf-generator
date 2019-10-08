@@ -1,1 +1,0 @@
-worker: node dropbox_upload.js
