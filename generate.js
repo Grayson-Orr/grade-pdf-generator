@@ -3,11 +3,11 @@
  * @author [Grayson Orr](https://github.com/grayson-orr)
  */
 
+require('colors')
 const PDFDocument = require('./pdf-tables')
 const { createReadStream, createWriteStream } = require('fs')
 const path = require('path')
 const csv = require('csv-parser')
-require('colors')
 const data = require('./data.json')
 const {
   createDir,
@@ -17,6 +17,9 @@ const {
   markCheckpoint,
   filterObj
 } = require('./helper')
+const pdfs = []
+const csvFilename = process.argv[2]
+const txtColor = { black: '#000000', earth: '#0000A0' }
 
 let pdf
 let courseName
@@ -34,10 +37,6 @@ let {
   coursePDFDirectory,
   courseAssessment
 } = data
-
-const pdfs = []
-const csvFilename = process.argv[2]
-const txtColor = { black: '#000000', earth: '#0000A0' }
 
 /**
  * @param {string} myAssignmentName

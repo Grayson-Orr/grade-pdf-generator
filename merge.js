@@ -3,15 +3,15 @@
  * @author [Grayson Orr](https://github.com/grayson-orr)
  */
 
+require('colors')
 const PDFMerge = require('pdfmerge')
 const data = require('./data.json')
-require('colors')
-
-let courseDir
-let interval = 1500
 const jsonFilename = process.argv[2]
 const jsonPath = require(`./json/${jsonFilename}`)
 const { courseJSONFile, coursePDFDirectory } = data
+
+let courseDir
+let interval = 1500
 
 jsonPath.map((d, idx) => {
   const { githubname, studentname } = d

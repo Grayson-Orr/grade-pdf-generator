@@ -3,18 +3,17 @@
  * @author [Grayson Orr](https://github.com/grayson-orr)
  */
 
-const nodeoutlook = require('nodejs-nodemailer-outlook')
 require('colors')
+const nodeoutlook = require('nodejs-nodemailer-outlook')
 const { email, password } = require('./config.json')
 const data = require('./data.json')
+const jsonFilename = process.argv[2]
+const jsonPath = require(`./json/${jsonFilename}`)
+const { courseName, courseJSONFile, coursePDFDirectory } = data
 
 let subject
 let attachment
 let interval = 7500
-
-const jsonFilename = process.argv[2]
-const jsonPath = require(`./json/${jsonFilename}`)
-const { courseName, courseJSONFile, coursePDFDirectory } = data
 
 jsonPath.map((d, idx) => {
   const { githubname, studentname } = d

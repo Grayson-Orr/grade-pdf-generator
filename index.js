@@ -3,14 +3,12 @@
  * @author [Grayson Orr](https://github.com/grayson-orr)
  */
 
+require('colors')
 const { exec } = require('shelljs')
 const { prompt } = require('inquirer')
-require('colors')
-
 const { fileExists } = require('./helper')
 const data = require('./data.json')
 const { courseCSVFile, courseJSONFile } = data
-
 const initialQuestion = {
   type: 'list',
   name: 'pdfCommand',
@@ -52,7 +50,7 @@ const questionPrompt = (myQuestion, myScript) => {
 
 exec('clear')
 
-console.log('PDF Command Script\n'.blue.bold)
+console.log('PDF Script\n'.blue.bold)
 
 prompt(initialQuestion).then(ans => {
   const { pdfCommand } = ans
