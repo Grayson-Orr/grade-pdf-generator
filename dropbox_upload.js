@@ -11,28 +11,17 @@ const { dropboxAccessToken } = require('./config.json')
 const dropbox = dropboxV2Api.authenticate({
   token: dropboxAccessToken
 })
-const courseName = process.argv[2]
-
-let pdfDir
-
-switch (courseName) {
-  case 'mobile':
-    pdfDir = ''
-    break
-  case 'oosd':
-    pdfDir = ''
-    break
-  case 'prog-four':
-    pdfDir = 'prog-four-pdf'
-    break
-  case 'web-one':
-    pdfDir = 'web-one-pdf'
-    break
-  default:
-    break
+/** Lookup table */
+const courses = {
+  mobile: 'mobile-pdf',
+  oosd: 'oosd-pdf',
+  progfour: 'prog-four-pdf',
+  webone: 'web-one-pdf'
 }
+const courseName = process.argv[2]
+const coursePDF = courses[courseName]
 
-glob(`./pdf/${pdfDir}/*.pdf`, {}, (err, files) => {
+glob(`./pdf/${coursePDF}/*.pdf`, {}, (err, files) => {
   files.map(f => {
     let split = f.split('/')
     let filePath = split[split.length - 1]
@@ -43,7 +32,7 @@ glob(`./pdf/${pdfDir}/*.pdf`, {}, (err, files) => {
         parameters: {
           path: `/${filePath}`
         },
-        readStream: createReadStream(`./pdf/${pdfDir}/${filePath}`)
+        readStream: createReadStream(`./pdf/${coursePDF}/${filePath}`)
       },
       _ => {
         console.log(`${filePath} uploaded to Dropbox.`.blue)

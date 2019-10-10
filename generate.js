@@ -63,10 +63,10 @@ const generate = (
   createZIP(pdfDir, `./zip/${myPDFDir}.zip`)
   createJSON(path.join('csv', myCSVFilename), path.join('json', myJSONFilename))
   courseName = myCourseName
-  copyFiles(
-    path.join('pdf', myPDFDir, myStudentFilename),
-    `../github-classroom-script/results/${myStudentFilename}`
-  )
+  // copyFiles(
+  //   path.join('pdf', myPDFDir, myStudentFilename),
+  //   `../github-classroom-script/results/${myStudentFilename}`
+  // )
 }
 
 /**
@@ -149,8 +149,8 @@ const createFeedback = (myArr, myColor, myContColor) => {
 }
 
 /**
- * @param {string} fileFrom 
- * @param {string} fileTo 
+ * @param {string} fileFrom
+ * @param {string} fileTo
  */
 const copyFiles = (fileFrom, fileTo) => {
   copyFile(fileFrom, fileTo, err => {

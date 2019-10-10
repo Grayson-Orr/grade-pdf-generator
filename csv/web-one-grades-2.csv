@@ -3,7 +3,7 @@ studentid,studentname,studentlogin,studentemail,githubname,overall,grade,assignm
 1000064560,Chalmers Blake,chalbr1,chalbr1@student.op.ac.nz,Bricode,8,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,8,1,1,1,1,0,0,0,0,0,0,4
 1000033645,Gibson Bryn,gibsbl2,gibsbl2@student.op.ac.nz,BrynGibson,12,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,12,1,1,1,1,1,1,0,0,0,0,6
 1000061387,Davidson Clayton,davica3,davica3@student.op.ac.nz,CADProgramming,12,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,12,1,1,1,1,1,1,0,0,0,0,6
-1000061494,Thomas Conrad,thomcs4,thomcs4@student.op.ac.nz,Conrad-Thomas,8,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,8,1,1,1,1,0,0,0,0,0,0,4
+1000061494,Thomas Conrad,thomcs4,thomcs4@student.op.ac.nz,Conrad-Thomas,12,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,12,1,1,1,1,1,1,0,0,0,0,6
 1000064478,Alding Deegan,aldidr1,aldidr1@student.op.ac.nz,DeeganAlding,4,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,4,1,0,1,0,0,0,0,0,0,0,2
 1000013698,Gillan Matthew (Matt),gillmd3,gillmd3@student.op.ac.nz,gillmd3,4,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,4,1,1,0,0,0,0,0,0,0,0,2
 1000062029,Hannigan Jacob,hannjj1,hannjj1@student.op.ac.nz,hannjj1,0,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,0,0,0,0,0,0,0,0,0,0,0,0
@@ -19,3 +19,8 @@ studentid,studentname,studentlogin,studentemail,githubname,overall,grade,assignm
 1000069952,Ens Patrick,enspj1,enspj1@student.op.ac.nz,PatrickJosephEns,12,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,12,1,1,1,1,1,1,0,0,0,0,6
 1000065399,Hewitt Samuel (Sam),hewisj1,hewisj1@student.op.ac.nz,SamHewitt,8,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,8,1,1,1,1,0,0,0,0,0,0,4
 1000067926,Barnes Samuel (Sam),barnsj2,barnsj2@student.op.ac.nz,SamJBarnes2000,4,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,4,1,1,0,0,0,0,0,0,0,0,2
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

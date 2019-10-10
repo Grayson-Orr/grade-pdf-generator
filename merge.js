@@ -5,31 +5,19 @@
 
 require('colors')
 const PDFMerge = require('pdfmerge')
-const data = require('./data.json')
 const jsonFilename = process.argv[2]
 const jsonPath = require(`./json/${jsonFilename}`)
-const { courseJSONFile, coursePDFDirectory } = data
+/** Lookup table */
+const courses = {
+  'prog-four-grades.json': 'prog-four-pdf',
+  'web-one-grades.json': 'web-one-pdf'
+}
+const coursePDF = courses[jsonFilename]
 
-let courseDir
 let interval = 1500
 
 jsonPath.map((d, idx) => {
   const { githubname, studentname } = d
-
-  switch (jsonFilename) {
-    case courseJSONFile[0]:
-      break
-    case courseJSONFile[1]:
-      break
-    case courseJSONFile[2]:
-      courseDir = coursePDFDirectory[2]
-      break
-    case courseJSONFile[3]:
-      break
-    default:
-      break
-  }
-
   /**
    * Merge PDF files every 1.5 seconds
    */
@@ -37,10 +25,10 @@ jsonPath.map((d, idx) => {
     console.log(`Merging PDF files for ${studentname}.`.green)
     PDFMerge(
       [
-        `./pdf/${courseDir}/results-${githubname}.pdf`,
-        `./pdf/${courseDir}/roguelike/roguelike-${githubname}.pdf`
+        `./pdf/${coursePDF}/results-${githubname}.pdf`,
+        `./pdf/${coursePDF}/roguelike/roguelike-${githubname}.pdf`
       ],
-      `./pdf/${courseDir}/final/final-results-${githubname}.pdf`
+      `./pdf/${coursePDF}/final/final-results-${githubname}.pdf`
     )
       .then(_ => console.log(`PDF files merged for ${studentname}.`.blue))
       .catch(err => console.log(err))
