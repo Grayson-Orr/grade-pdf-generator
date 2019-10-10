@@ -6,37 +6,19 @@
 require('colors')
 const nodeoutlook = require('nodejs-nodemailer-outlook')
 const { email, password } = require('./config.json')
-const data = require('./data.json')
 const jsonFilename = process.argv[2]
 const jsonPath = require(`./json/${jsonFilename}`)
-const { courseName, courseJSONFile, coursePDFDirectory } = data
+const courses = {
+  'prog-four-grades.json': ['IN628: Programming 4', 'prog-four-pdf'],
+  'web-one-grades.json': ['IN512: Web 1', 'web-one-pdf']
+}
+const courseName = courses[jsonFilename][0]
+const coursePDF = courses[jsonFilename][1]
 
-let subject
-let attachment
 let interval = 7500
 
 jsonPath.map((d, idx) => {
   const { githubname, studentname } = d
-
-  switch (jsonFilename) {
-    case courseJSONFile[0]:
-      subject = `${courseName[0]} Course Results`
-      break
-    case courseJSONFile[1]:
-      subject = `${courseName[1]} Course Results`
-      break
-    case courseJSONFile[2]:
-      subject = `${courseName[2]} Course Results`
-      attachment = `./pdf/${
-        coursePDFDirectory[2]
-      }/final/final-results-${githubname}.pdf`
-      break
-    case courseJSONFile[3]:
-      subject = `${courseName[3]} Course Results`
-      break
-    default:
-      break
-  }
 
   /**
    * Send an email every 7 seconds
@@ -50,11 +32,11 @@ jsonPath.map((d, idx) => {
       },
       from: email,
       to: `orrgl1@student.op.ac.nz`,
-      subject: subject,
-      html: `Hello, your course result for <b>${subject}</b>, has been released on EBS. Please check your <b>"Results & Awards"</b> tab in your <b>Student Hub</b> portal. Have a good holiday.`,
+      subject: courseName,
+      html: `Hello, your course result for <b>${courseName}</b>, has been released on EBS. Please check your <b>"Results & Awards"</b> tab in your <b>Student Hub</b> portal. Have a good holiday.`,
       attachments: [
         {
-          path: attachment
+          path: `./pdf/${coursePDF}/final/final-results-${githubname}.pdf`
         }
       ],
       onError: err => console.log(err),

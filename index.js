@@ -73,17 +73,11 @@ prompt(initialQuestion).then(ans => {
       .red.bold
   )
 
-  switch (pdfCommand) {
-    case 'generate':
-      questionPrompt(csvQuestion, 'generate.js')
-      break
-    case 'merge':
-      questionPrompt(jsonQuestion, 'merge.js')
-      break
-    case 'send':
-      questionPrompt(jsonQuestion, 'send.js')
-      break
-    default:
-      break
+  const commands = {
+    generate: [csvQuestion, 'generate.js'],
+    merge: [jsonQuestion, 'merge.js'],
+    send: [jsonQuestion, 'send.js']
   }
+
+  questionPrompt(commands[pdfCommand][0], commands[pdfCommand][1])
 })
