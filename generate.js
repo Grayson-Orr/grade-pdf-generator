@@ -5,7 +5,7 @@
 
 require('colors')
 const PDFDocument = require('./pdf-tables')
-const { createReadStream, createWriteStream } = require('fs')
+const { copyFile, createReadStream, createWriteStream } = require('fs')
 const path = require('path')
 const csv = require('csv-parser')
 const data = require('./data.json')
@@ -54,12 +54,19 @@ const generate = (
   myJSONFilename,
   myCourseName
 ) => {
+  const pdfDir = path.join('pdf', myPDFDir)
   assignmentName = myAssignmentName
-  createDir(path.join('pdf', `${myPDFDir}/final`))
-  pdfFile = createPDF(`pdf/${myPDFDir}`, myStudentFilename)
-  createZIP(`pdf/${myPDFDir}`, `zip/${myPDFDir}.zip`)
-  createJSON(path.join('csv', myCSVFilename), `json/${myJSONFilename}`)
+  createDir(pdfDir)
+  createDir(pdfDir, 'final')
+  createDir('../github-classroom-script/results')
+  pdfFile = createPDF(pdfDir, myStudentFilename)
+  createZIP(pdfDir, `./zip/${myPDFDir}.zip`)
+  createJSON(path.join('csv', myCSVFilename), path.join('json', myJSONFilename))
   courseName = myCourseName
+  copyFiles(
+    path.join('pdf', myPDFDir, myStudentFilename),
+    `../github-classroom-script/results/${myStudentFilename}`
+  )
 }
 
 /**
@@ -139,6 +146,17 @@ const createFeedback = (myArr, myColor, myContColor) => {
       myContColor,
       val
     )
+}
+
+/**
+ * @param {string} fileFrom 
+ * @param {string} fileTo 
+ */
+const copyFiles = (fileFrom, fileTo) => {
+  copyFile(fileFrom, fileTo, err => {
+    if (err) throw err
+    console.log(`${fileFrom} copied to ${fileTo}.`)
+  })
 }
 
 /**
@@ -263,6 +281,10 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
             headers: courseAssessment.web_one_checkpoints,
             rows: [inClassCPRowsOne]
           }
+          assignmentOneTbl = {
+            headers: courseAssessment.markingSchedule,
+            rows: staticSiteAssignment
+          }
           generate(
             'Item Review Static Site',
             coursePDFDirectory[3],
@@ -335,7 +357,7 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
             1,
             10,
             earth,
-            'Percentage: ',
+            'Comments: ',
             black,
             'Please refer to the feedback at the end of this document.'
           )
@@ -343,7 +365,7 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
             1,
             10,
             earth,
-            'Percentage: ',
+            'Grade: ',
             black,
             `${s.a1total} (${s.a1grade})`
           )
@@ -404,6 +426,31 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
           pdf.addPage()
 
           createHeading(0, 13, earth, `${assignmentName} Marking Schedule:`)
+          createTable(black, assignmentOneTbl, 72, 95, 350, 10)
+          createSubheading(
+            1,
+            10,
+            earth,
+            'Comments: ',
+            black,
+            'Please refer to the feedback at the end of this document.'
+          )
+          createSubheading(
+            1,
+            10,
+            earth,
+            'Grade: ',
+            black,
+            `${s.a1total} (${s.a1grade})`
+          )
+          createSubheading(
+            1,
+            10,
+            earth,
+            'Percentage: ',
+            black,
+            `You have gained ${s.assignment1}% out of a possible 20.00%.`
+          )
           pdf.addPage()
 
           createHeading(0, 13, earth, 'SBA Marking Schedule:')

@@ -35,7 +35,7 @@ switch (courseName) {
 glob(`./pdf/${pdfDir}/*.pdf`, {}, (err, files) => {
   files.map(f => {
     let split = f.split('/')
-    let filePath = `${split[split.length - 1]}`
+    let filePath = split[split.length - 1]
     console.log(`Uploading ${filePath} to Dropbox.`.green)
     dropbox(
       {

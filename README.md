@@ -55,5 +55,5 @@ npm run test
 #### Upload PDF Files
 
 ```javascript
-node dropbox_upload.js
+node dropbox_upload.js <course name>
 ```

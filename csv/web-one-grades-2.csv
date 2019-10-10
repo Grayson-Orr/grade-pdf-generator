@@ -1,0 +1,21 @@
+studentid,studentname,studentlogin,studentemail,githubname,overall,grade,assignment1,a1mark1,a1mark2,a1mark3,a1total,a1grade,assignment2,a2mark1,a2mark2,a2mark3,a2total,a2grade,sba,sbatotal,sbagrade,practicals,checkpoint1,checkpoint2,checkpoint3,checkpoint4,checkpoint5,checkpoint6,checkpoint7,checkpoint8,checkpoint9,checkpoint10,total
+1000069497,Jordaan Albertus (Albert),jordaj2,jordaj2@student.op.ac.nz,albert203,8,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,8,1,1,1,1,0,0,0,0,0,0,4
+1000064560,Chalmers Blake,chalbr1,chalbr1@student.op.ac.nz,Bricode,8,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,8,1,1,1,1,0,0,0,0,0,0,4
+1000033645,Gibson Bryn,gibsbl2,gibsbl2@student.op.ac.nz,BrynGibson,12,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,12,1,1,1,1,1,1,0,0,0,0,6
+1000061387,Davidson Clayton,davica3,davica3@student.op.ac.nz,CADProgramming,12,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,12,1,1,1,1,1,1,0,0,0,0,6
+1000061494,Thomas Conrad,thomcs4,thomcs4@student.op.ac.nz,Conrad-Thomas,8,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,8,1,1,1,1,0,0,0,0,0,0,4
+1000064478,Alding Deegan,aldidr1,aldidr1@student.op.ac.nz,DeeganAlding,4,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,4,1,0,1,0,0,0,0,0,0,0,2
+1000013698,Gillan Matthew (Matt),gillmd3,gillmd3@student.op.ac.nz,gillmd3,4,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,4,1,1,0,0,0,0,0,0,0,0,2
+1000062029,Hannigan Jacob,hannjj1,hannjj1@student.op.ac.nz,hannjj1,0,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,0,0,0,0,0,0,0,0,0,0,0,0
+1000057609,Hare Cullan,harecb1,harecb1@student.op.ac.nz,harecb1,2,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,2,1,0,0,0,0,0,0,0,0,0,1
+1000053078,Howe Rheyden,howert1,howert1@student.op.ac.nz,howert1,4,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,4,1,1,0,0,0,0,0,0,0,0,2
+1000055857,Hunsche Taylor,hunstm1,hunstm1@student.op.ac.nz,hunstm1,6,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,6,1,1,1,0,0,0,0,0,0,0,3
+1000061707,Thomas Isaac,thomis1,thomis1@student.op.ac.nz,iscthomas,12,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,12,1,1,1,1,1,1,0,0,0,0,6
+1000068146,Brett Kieran,bretkg1,bretkg1@student.op.ac.nz,KieranBrett,12,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,12,1,1,1,1,1,1,0,0,0,0,6
+1000056131,O'Brien Liam,obrilj1,obrilj1@student.op.ac.nz,L-J-OB,0,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,0,0,0,0,0,0,0,0,0,0,0,0
+1000056132,Mandal Harold,mandha1,mandha1@student.op.ac.nz,mandha1,12,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,12,1,1,1,1,1,1,0,0,0,0,6
+1000070079,Meldrum-Harris Anthony,melda2,melda2@student.op.ac.nz,melda2,0,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,0,0,0,0,0,0,0,0,0,0,0,0
+1000065402,Adam Muhammed (Faizel),adamm7,adamm7@student.op.ac.nz,mfadam786,4,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,4,1,1,0,0,0,0,0,0,0,0,2
+1000069952,Ens Patrick,enspj1,enspj1@student.op.ac.nz,PatrickJosephEns,12,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,12,1,1,1,1,1,1,0,0,0,0,6
+1000065399,Hewitt Samuel (Sam),hewisj1,hewisj1@student.op.ac.nz,SamHewitt,8,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,8,1,1,1,1,0,0,0,0,0,0,4
+1000067926,Barnes Samuel (Sam),barnsj2,barnsj2@student.op.ac.nz,SamJBarnes2000,4,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,4,1,1,0,0,0,0,0,0,0,0,2

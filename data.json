@@ -9,7 +9,8 @@
     "mobile-grades.csv",
     "oosd-grades.csv",
     "prog-four-grades.csv",
-    "web-one-grades.csv"
+    "web-one-grades.csv",
+    "web-one-grades-2.csv"
   ],
   "courseJSONFile": [
     "mobile-grades.json",
