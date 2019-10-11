@@ -30,7 +30,7 @@ glob(`./pdf/${coursePDF}/*.pdf`, {}, (err, files) => {
       {
         resource: 'files/upload',
         parameters: {
-          path: `/${filePath}`
+          path: `/${coursePDF}/${filePath}`
         },
         readStream: createReadStream(`./pdf/${coursePDF}/${filePath}`)
       },

@@ -34,13 +34,7 @@
       "Theory Exam",
       "Overall Grade"
     ],
-    "web_one": [
-      "Checkpoints",
-      "Assignment",
-      "SBA",
-      "Project",
-      "Overall Grade"
-    ],
+    "web_one": ["Checkpoints", "Assignment", "SBA", "Project", "Overall Grade"],
     "prog_four_checkpoints_1": [
       "CP 1",
       "CP 2",

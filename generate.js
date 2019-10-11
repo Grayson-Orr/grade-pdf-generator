@@ -54,14 +54,11 @@ const generate = (
   myJSONFilename,
   myCourseName
 ) => {
-  const pdfDir = path.join('pdf', myPDFDir)
   assignmentName = myAssignmentName
-  createDir(pdfDir)
-  createDir(pdfDir, 'final')
-  createDir('../github-classroom-script/results')
-  pdfFile = createPDF(pdfDir, myStudentFilename)
-  createZIP(pdfDir, `./zip/${myPDFDir}.zip`)
-  createJSON(path.join('csv', myCSVFilename), path.join('json', myJSONFilename))
+  createDir(path.join('pdf', `${myPDFDir}/final`))
+  pdfFile = createPDF(`pdf/${myPDFDir}`, myStudentFilename)
+  createZIP(`pdf/${myPDFDir}`, `zip/${myPDFDir}.zip`)
+  createJSON(path.join('csv', myCSVFilename), `json/${myJSONFilename}`)
   courseName = myCourseName
   // copyFiles(
   //   path.join('pdf', myPDFDir, myStudentFilename),
