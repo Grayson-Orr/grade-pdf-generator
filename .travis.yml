@@ -1,8 +1,3 @@
-#
-# @version 0.5.0
-# @author [Grayson Orr](https://github.com/grayson-orr)
-#
-
 sudo: false
 
 language: node_js
