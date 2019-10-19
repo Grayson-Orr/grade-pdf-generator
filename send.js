@@ -18,7 +18,7 @@ const coursePDF = courses[jsonFilename][1]
 let interval = 7500
 
 jsonPath.map((d, idx) => {
-  const { githubname, studentname } = d
+  const { githubname, studentname, studentlogin } = d
 
   /**
    * Send an email every 7 seconds

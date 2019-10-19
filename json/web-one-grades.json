@@ -1,8 +1,0 @@
-[
- {
-  "studentid,studentname,studentlogin,studentemail,githubname,overall,grade,assignment1,a1mark1,a1mark2,a1mark3,a1total,a1grade,assignment2,a2mark1,a2mark2,a2mark3,a2total,a2grade,sba,sbatotal,sbagrade,practicals,checkpoint1,checkpoint2,checkpoint3,checkpoint4,checkpoint5,checkpoint6,checkpoint7,checkpoint8,checkpoint9,checkpoint10,total": "1000000001,Test1 Test1,TEST1,TEST1@student.op.ac.nz,test-1,0,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,0,0,0,0,0,0,0,0,0,0,0,0"
- },
- {
-  "studentid,studentname,studentlogin,studentemail,githubname,overall,grade,assignment1,a1mark1,a1mark2,a1mark3,a1total,a1grade,assignment2,a2mark1,a2mark2,a2mark3,a2total,a2grade,sba,sbatotal,sbagrade,practicals,checkpoint1,checkpoint2,checkpoint3,checkpoint4,checkpoint5,checkpoint6,checkpoint7,checkpoint8,checkpoint9,checkpoint10,total": "1000000002,Test2 Test2,TEST2,TEST2@student.op.ac.nz,test-2,0,E,0,0,0,0,0,E,0,0,0,0,0,E,0,0,E,0,0,0,0,0,0,0,0,0,0,0,0"
- }
-]

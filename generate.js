@@ -46,24 +46,14 @@ let {
  * @param {string} myJSONFilename
  * @param {string} myCourseName
  */
-const generate = (
-  myAssignmentName,
-  myPDFDir,
-  myStudentFilename,
-  myCSVFilename,
-  myJSONFilename,
-  myCourseName
-) => {
+const generate = (myAssignmentName, myPDFDir, myStudentFilename,
+  myCSVFilename, myJSONFilename, myCourseName) => {
   assignmentName = myAssignmentName
-  createDir(path.join('pdf', `${myPDFDir}/final`))
+  createDir(`pdf/${myPDFDir}`)
   pdfFile = createPDF(`pdf/${myPDFDir}`, myStudentFilename)
   createZIP(`pdf/${myPDFDir}`, `zip/${myPDFDir}.zip`)
   createJSON(path.join('csv', myCSVFilename), `json/${myJSONFilename}`)
   courseName = myCourseName
-  // copyFiles(
-  //   path.join('pdf', myPDFDir, myStudentFilename),
-  //   `../github-classroom-script/results/${myStudentFilename}`
-  // )
 }
 
 /**
@@ -74,14 +64,8 @@ const generate = (
  * @param {number} myWidth
  * @param {number} myFontSize
  */
-const createTable = (
-  myColor,
-  myTbl,
-  myMarginLeft,
-  myMarginTop,
-  myWidth,
-  myFontSize
-) => {
+const createTable = (myColor, myTbl, myMarginLeft,
+  myMarginTop, myWidth, myFontSize) => {
   pdf.fillColor(myColor).table(myTbl, myMarginLeft, myMarginTop, {
     width: myWidth,
     prepareHeader: () => pdf.fontSize(myFontSize),
@@ -96,11 +80,7 @@ const createTable = (
  * @param {string} myText
  */
 const createHeading = (mySpacing, myFontSize, myColor, myText) => {
-  pdf
-    .moveDown(mySpacing)
-    .fontSize(myFontSize)
-    .fillColor(myColor)
-    .text(myText)
+  pdf.moveDown(mySpacing).fontSize(myFontSize).fillColor(myColor).text(myText)
 }
 
 /**
@@ -112,37 +92,24 @@ const createHeading = (mySpacing, myFontSize, myColor, myText) => {
  * @param {string} myContTxt
  */
 const createSubheading = (
-  mySpacing,
-  myFontSize,
-  myColor,
-  myTxt,
-  myContColor,
-  myContTxt
-) => {
-  pdf
-    .moveDown(mySpacing)
-    .fontSize(myFontSize)
-    .fillColor(myColor)
-    .text(myTxt, { continued: true })
-    .fillColor(myContColor)
-    .text(myContTxt)
+  mySpacing, myFontSize, myColor,
+  myTxt, myContColor, myContTxt) => {
+  pdf.moveDown(mySpacing).fontSize(myFontSize).fillColor(myColor)
+    .text(myTxt, { continued: true }).fillColor(myContColor).text(myContTxt)
 }
 
-/**
- * @param {object} myArr
- * @param {string} myColor
- * @param {string} myContColor
- */
-const createFeedback = (myArr, myColor, myContColor) => {
-  for (let [i, val] of myArr.entries())
-    createSubheading(
-      1,
-      10,
-      myColor,
-      `Checkpoint ${i + 1} - : `,
-      myContColor,
-      val
-    )
+const generateCheckpoint = (myTotal, myTotalCount, myPracticals, myPracticalPercentage) => {
+  createSubheading(1, 10, txtColor.earth, 'Total: ', txtColor.black, `You have completed ${myTotal} out of ${myTotalCount} practicals.`)
+  createSubheading(1, 10, txtColor.earth, 'Percentage: ', txtColor.black, `You have gained ${myPracticals}% out of a possible ${myPracticalPercentage}%.`)
+  pdf.image('./public/img/web-one-cp-completion.png', 57, 375, { width: 300, height: 200 })
+}
+
+const generateAssignment = (myTbl, myAssignmentName, myTotal, myGrade, myPercentage, myAssignmentPercentage) => {
+  createHeading(0, 13, txtColor.earth, `${myAssignmentName} Marking Schedule:`)
+  createTable(txtColor.black, myTbl, 72, 95, 350, 10)
+  createSubheading(1, 10, txtColor.earth, 'Comments: ', txtColor.black, 'Please refer to the feedback at the end of this document.')
+  createSubheading(1, 10, txtColor.earth, 'Grade: ', txtColor.black, `${myTotal} (${myGrade})`)
+  createSubheading(1, 10, txtColor.earth, 'Percentage: ', txtColor.black, `You have gained ${myPercentage}% out of a possible ${myAssignmentPercentage}%.`)
 }
 
 /**
@@ -167,7 +134,7 @@ createDir('zip')
 createReadStream(path.join(__dirname, 'csv', csvFilename))
   .pipe(csv())
   .on('data', data => {
-    const { black, earth } = txtColor
+    
     students = []
     students.push(data)
     students.map(s => {
@@ -258,14 +225,8 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
             headers: courseAssessment.markingSchedule,
             rows: langExplorationAssignment
           }
-          generate(
-            'Roguelike Assignment',
-            coursePDFDirectory[2],
-            myStudentFilename,
-            courseCSVFile[2],
-            courseJSONFile[2],
-            'IN628: Programming 4'
-          )
+          generate('Roguelike Assignment', coursePDFDirectory[2], myStudentFilename,
+            courseCSVFile[2], courseJSONFile[2], 'IN628: Programming 4')
           break
         /**
          * IN512: Web 1
@@ -282,14 +243,8 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
             headers: courseAssessment.markingSchedule,
             rows: staticSiteAssignment
           }
-          generate(
-            'Item Review Static Site',
-            coursePDFDirectory[3],
-            myStudentFilename,
-            courseCSVFile[3],
-            courseJSONFile[3],
-            'IN510: Web 1 - Technology and Development'
-          )
+          generate('Item Review Static Site', coursePDFDirectory[3], myStudentFilename,
+            courseCSVFile[3], courseJSONFile[3], 'IN510: Web 1 - Technology and Development')
           break
         default:
           break
@@ -297,27 +252,21 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
 
       const studentLastName = studentName.substr(0, studentName.indexOf(' '))
       const studentFirstName = studentName.substr(studentName.indexOf(' ') + 1)
-      const progFourCPFeedback = filterObj(
-        s,
-        /^feedback([1-9]|1[0-9]|2[0-4])$/i
-      )
 
       pdf = new PDFDocument()
       pdf.pipe(createWriteStream(pdfFile))
       pdf.font('./public/font/calibril.ttf')
-      pdf.image('./public/img/op-logo.png', 50, 25, { width: 100, height: 50 })
+      pdf.image('./public/img/op-logo.png', 50, 25, { width: 85, height: 45 })
       pdf.fontSize(16).text(courseName, { align: 'center' })
-      pdf
-        .moveDown(1)
-        .fontSize(16)
+      pdf.moveDown(1).fontSize(16)
         .text(`Name: ${studentFirstName} ${studentLastName} - ${s.studentid}`, {
           align: 'center'
         })
 
-      createHeading(1, 13, earth, 'Overall Marks:')
-      createTable(black, table, 72, 170, 400, 10)
-      createHeading(1, 13, earth, 'In-Class Checkpoints:')
-      createTable(black, inClassCheckpointsTblOne, 72, 250, 425, 10)
+      createHeading(1, 13, txtColor.earth, 'Overall Marks:')
+      createTable(txtColor.black, table, 72, 170, 400, 10)
+      createHeading(1, 13, txtColor.earth, 'In-Class Checkpoints:')
+      createTable(txtColor.black, inClassCheckpointsTblOne, 72, 250, 425, 10)
 
       switch (csvFilename) {
         case courseCSVFile[0]:
@@ -325,135 +274,18 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
         case courseCSVFile[1]:
           break
         case courseCSVFile[2]:
-          createTable(black, inClassCheckpointsTblTwo, 72, 325, 425, 10)
-          createSubheading(
-            1,
-            10,
-            earth,
-            'Total: ',
-            black,
-            `You have completed ${s.total} out of 24 in-class checkpoints.`
-          )
-          createSubheading(
-            1,
-            10,
-            earth,
-            'Percentage: ',
-            black,
-            `You have gained ${s.practicals}% out of a possible 15.00%.`
-          )
+          createTable(txtColor.black, inClassCheckpointsTblTwo, 72, 325, 425, 10)
+          generateCheckpoint(s.total, '24', s.practicals, '15')
           pdf.addPage()
-
-          createHeading(0, 13, earth, 'Checkpoint Feedback:')
-          createFeedback(progFourCPFeedback, earth, black)
+          generateAssignment(assignmentOneTbl, assignmentName, s.a1total, s.a1grade, s.assignment1, '45.00')
           pdf.addPage()
-
-          createHeading(0, 13, earth, `${assignmentName} Marking Schedule:`)
-          createTable(black, assignmentOneTbl, 72, 95, 350, 10)
-          createSubheading(
-            1,
-            10,
-            earth,
-            'Comments: ',
-            black,
-            'Please refer to the feedback at the end of this document.'
-          )
-          createSubheading(
-            1,
-            10,
-            earth,
-            'Grade: ',
-            black,
-            `${s.a1total} (${s.a1grade})`
-          )
-          createSubheading(
-            1,
-            10,
-            earth,
-            'Percentage: ',
-            black,
-            `You have gained ${s.assignment1}% out of a possible 45.00%.`
-          )
-          pdf.addPage()
-
-          createHeading(0, 13, earth, 'Langauge Exploration Marking Schedule:')
-          createTable(black, assignmentTwoTbl, 72, 95, 350, 10)
-          createSubheading(
-            2,
-            10,
-            earth,
-            'Comments: ',
-            black,
-            'Please refer to the feedback at the end of this document.'
-          )
-          createSubheading(
-            1,
-            10,
-            earth,
-            'Grade: ',
-            black,
-            `${s.a2total} (${s.a2grade})`
-          )
-          createSubheading(
-            1,
-            10,
-            earth,
-            'Percentage: ',
-            black,
-            `You have gained ${s.assignment2}% out of a possible 25.00%.`
-          )
+          generateAssignment(assignmentTwoTbl, 'Langauge Exploration', s.a2total, s.a2grade, s.assignment2, '25.00')
           break
         case courseCSVFile[3]:
-          createSubheading(
-            1,
-            10,
-            earth,
-            'Total: ',
-            black,
-            `You have completed ${s.total} out of 10 practicals.`
-          )
-          createSubheading(
-            1,
-            10,
-            earth,
-            'Percentage: ',
-            black,
-            `You have gained ${s.practicals}% out of a possible 20.00%.`
-          )
+          generateCheckpoint(s.total, '10', s.practicals, '20')
           pdf.addPage()
-
-          createHeading(0, 13, earth, `${assignmentName} Marking Schedule:`)
-          createTable(black, assignmentOneTbl, 72, 95, 350, 10)
-          createSubheading(
-            1,
-            10,
-            earth,
-            'Comments: ',
-            black,
-            'Please refer to the feedback at the end of this document.'
-          )
-          createSubheading(
-            1,
-            10,
-            earth,
-            'Grade: ',
-            black,
-            `${s.a1total} (${s.a1grade})`
-          )
-          createSubheading(
-            1,
-            10,
-            earth,
-            'Percentage: ',
-            black,
-            `You have gained ${s.assignment1}% out of a possible 20.00%.`
-          )
+          generateAssignment(assignmentOneTbl, assignmentName, s.a1total, s.a1grade, s.assignment1, '20.00')
           pdf.addPage()
-
-          createHeading(0, 13, earth, 'SBA Marking Schedule:')
-          pdf.addPage()
-
-          createHeading(0, 13, earth, 'Project Marking Schedule:')
           break
         default:
           break
