@@ -9,14 +9,8 @@ const { copyFile, createReadStream, createWriteStream } = require('fs')
 const path = require('path')
 const csv = require('csv-parser')
 const data = require('./data.json')
-const {
-  createDir,
-  createPDF,
-  createZIP,
-  createJSON,
-  markCheckpoint,
-  filterObj
-} = require('./helper')
+const { createDir, createPDF, createZIP, createJSON,
+  markCheckpoint, filterObj } = require('./helper')
 const pdfs = []
 const csvFilename = process.argv[2]
 const txtColor = { black: '#000000', earth: '#0000A0' }
@@ -31,12 +25,8 @@ let inClassCheckpointsTblOne = {}
 let inClassCheckpointsTblTwo = {}
 let assignmentOneTbl = {}
 let assignmentTwoTbl = {}
-let {
-  courseCSVFile,
-  courseJSONFile,
-  coursePDFDirectory,
-  courseAssessment
-} = data
+let { courseCSVFile, courseJSONFile, 
+  coursePDFDirectory, courseAssessment } = data
 
 /**
  * @param {string} myAssignmentName
@@ -101,7 +91,7 @@ const createSubheading = (
 const generateCheckpoint = (myTotal, myTotalCount, myPracticals, myPracticalPercentage) => {
   createSubheading(1, 10, txtColor.earth, 'Total: ', txtColor.black, `You have completed ${myTotal} out of ${myTotalCount} practicals.`)
   createSubheading(1, 10, txtColor.earth, 'Percentage: ', txtColor.black, `You have gained ${myPracticals}% out of a possible ${myPracticalPercentage}%.`)
-  pdf.image('./public/img/web-one-cp-completion.png', 57, 375, { width: 300, height: 200 })
+  pdf.image('./public/img/web-one-cp-completion.png', 57, 350, { width: 400, height: 300 })
 }
 
 const generateAssignment = (myTbl, myAssignmentName, myTotal, myGrade, myPercentage, myAssignmentPercentage) => {
@@ -134,7 +124,6 @@ createDir('zip')
 createReadStream(path.join(__dirname, 'csv', csvFilename))
   .pipe(csv())
   .on('data', data => {
-    
     students = []
     students.push(data)
     students.map(s => {
@@ -182,9 +171,9 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
       ]
 
       const staticSiteAssignment = [
-        ['Requirements', '33%'],
-        ['Code Quality', '33%'],
-        ['Best Practices', '33%']
+        ['Requirements', '10', s.a1mark1],
+        ['Code Quality', '10', s.a1mark2],
+        ['Best Practices', '10', s.a1mark3]
       ]
 
       const myStudentFilename = `results-${s.githubname}.pdf`
@@ -239,6 +228,7 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
             headers: courseAssessment.web_one_checkpoints,
             rows: [inClassCPRowsOne]
           }
+          courseAssessment.markingSchedule[1] = 'Total'
           assignmentOneTbl = {
             headers: courseAssessment.markingSchedule,
             rows: staticSiteAssignment
@@ -277,14 +267,14 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
           createTable(txtColor.black, inClassCheckpointsTblTwo, 72, 325, 425, 10)
           generateCheckpoint(s.total, '24', s.practicals, '15')
           pdf.addPage()
-          generateAssignment(assignmentOneTbl, assignmentName, s.a1total, s.a1grade, s.assignment1, '45.00')
+          generateAssignment(assignmentOneTbl, assignmentName, s.a1total, s.a1grade, s.assignment1, '45')
           pdf.addPage()
-          generateAssignment(assignmentTwoTbl, 'Langauge Exploration', s.a2total, s.a2grade, s.assignment2, '25.00')
+          generateAssignment(assignmentTwoTbl, 'Langauge Exploration', s.a2total, s.a2grade, s.assignment2, '25')
           break
         case courseCSVFile[3]:
           generateCheckpoint(s.total, '10', s.practicals, '20')
           pdf.addPage()
-          generateAssignment(assignmentOneTbl, assignmentName, s.a1total, s.a1grade, s.assignment1, '20.00')
+          generateAssignment(assignmentOneTbl, assignmentName, s.a1total, s.a1grade, s.assignment1, '20')
           pdf.addPage()
           break
         default:

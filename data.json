@@ -26,6 +26,7 @@
   ],
   "courseAssessment": {
     "markingSchedule": ["Component", "Weight", "Score"],
+    "markingScheduleTwo": ["Component", "Weight", "Score"],
     "mobile": ["Practicals", "Project", "Exam", "Overall Grade"],
     "oosd": ["Practicals", "Project", "Exam", "Overall Grade"],
     "prog_four": [
