@@ -75,6 +75,7 @@
       "CP 8",
       "CP 9",
       "CP 10"
-    ]
+    ],
+    "sba_marks": ["Question No.", "Total", "Score"]
   }
 }

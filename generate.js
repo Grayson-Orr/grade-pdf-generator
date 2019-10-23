@@ -9,7 +9,7 @@ const { copyFile, createReadStream, createWriteStream } = require('fs')
 const path = require('path')
 const csv = require('csv-parser')
 const data = require('./data.json')
-const { createDir, createPDF, createZIP, createJSON,
+const { createDir, createPDF, createJSON,
   markCheckpoint, filterObj } = require('./helper')
 const pdfs = []
 const csvFilename = process.argv[2]
@@ -25,6 +25,7 @@ let inClassCheckpointsTblOne = {}
 let inClassCheckpointsTblTwo = {}
 let assignmentOneTbl = {}
 let assignmentTwoTbl = {}
+let skillsBasedAssessment = {}
 let { courseCSVFile, courseJSONFile, 
   coursePDFDirectory, courseAssessment } = data
 
@@ -41,7 +42,6 @@ const generate = (myAssignmentName, myPDFDir, myStudentFilename,
   assignmentName = myAssignmentName
   createDir(`pdf/${myPDFDir}`)
   pdfFile = createPDF(`pdf/${myPDFDir}`, myStudentFilename)
-  createZIP(`pdf/${myPDFDir}`, `zip/${myPDFDir}.zip`)
   createJSON(path.join('csv', myCSVFilename), `json/${myJSONFilename}`)
   courseName = myCourseName
 }
@@ -97,8 +97,8 @@ const generateCheckpoint = (myTotal, myTotalCount, myPracticals, myPracticalPerc
 const generateAssignment = (myTbl, myAssignmentName, myTotal, myGrade, myPercentage, myAssignmentPercentage) => {
   createHeading(0, 13, txtColor.earth, `${myAssignmentName} Marking Schedule:`)
   createTable(txtColor.black, myTbl, 72, 95, 350, 10)
-  createSubheading(1, 10, txtColor.earth, 'Comments: ', txtColor.black, 'Please refer to the feedback at the end of this document.')
-  createSubheading(1, 10, txtColor.earth, 'Grade: ', txtColor.black, `${myTotal} (${myGrade})`)
+  // createSubheading(1, 10, txtColor.earth, 'Comments: ', txtColor.black, 'Please refer to the feedback at the end of this document.')
+  createSubheading(1, 10, txtColor.earth, 'Grade: ', txtColor.black, `${myTotal} % (${myGrade})`)
   createSubheading(1, 10, txtColor.earth, 'Percentage: ', txtColor.black, `You have gained ${myPercentage}% out of a possible ${myAssignmentPercentage}%.`)
 }
 
@@ -114,12 +114,11 @@ const copyFiles = (fileFrom, fileTo) => {
 }
 
 /**
- * Create a csv, json, pdf and zip directory
+ * Create a csv, json and pdf directory
  */
 createDir('csv')
 createDir('json')
 createDir('pdf')
-createDir('zip')
 
 createReadStream(path.join(__dirname, 'csv', csvFilename))
   .pipe(csv())
@@ -174,6 +173,18 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
         ['Requirements', '10', s.a1mark1],
         ['Code Quality', '10', s.a1mark2],
         ['Best Practices', '10', s.a1mark3]
+      ]
+
+      const sba = [
+        ['1', '4', s.sbaq1],
+        ['2', '2', s.sbaq2],
+        ['3', '2', s.sbaq3],
+        ['4', '6', s.sbaq4],
+        ['5', '2', s.sbaq5],
+        ['6', '2', s.sbaq6],
+        ['7', '2', s.sbaq7],
+        ['8', '3', s.sbaq8],
+        ['Commits', '8', s.sbacommits]
       ]
 
       const myStudentFilename = `results-${s.githubname}.pdf`
@@ -233,6 +244,10 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
             headers: courseAssessment.markingSchedule,
             rows: staticSiteAssignment
           }
+          skillsBasedAssessment = {
+            headers: courseAssessment.sba_marks,
+            rows: sba
+          }
           generate('Item Review Static Site', coursePDFDirectory[3], myStudentFilename,
             courseCSVFile[3], courseJSONFile[3], 'IN510: Web 1 - Technology and Development')
           break
@@ -275,6 +290,8 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
           generateCheckpoint(s.total, '10', s.practicals, '20')
           pdf.addPage()
           generateAssignment(assignmentOneTbl, assignmentName, s.a1total, s.a1grade, s.assignment1, '20')
+          pdf.addPage()
+          generateAssignment(skillsBasedAssessment, 'Skills-Based Assessment', s.sbatotal, s.sbagrade, s.sba, '30')
           pdf.addPage()
           break
         default:

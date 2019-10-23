@@ -5,7 +5,6 @@
 
 const path = require('path')
 const { existsSync, mkdirSync } = require('fs')
-const zipper = require('zip-local')
 const csvToJson = require('convert-csv-to-json')
 
 /**
@@ -34,21 +33,6 @@ const fileExists = (myCourseFile, myOtherFile) => {
  */
 const createPDF = (myPath, myFilename) => {
   return path.join(myPath, myFilename)
-}
-
-/**
- * @param {string} myPath
- * @param {string} myZIPName
- */
-const createZIP = (myPath, myZIPName) => {
-  zipper.zip(myPath, (err, zipped) => {
-    if (!err) {
-      zipped.compress()
-      zipped.memory()
-      zipped.save(myZIPName)
-    }
-  })
-  return myZIPName
 }
 
 /**
@@ -84,7 +68,6 @@ module.exports = {
   createDir,
   fileExists,
   createPDF,
-  createZIP,
   createJSON,
   markCheckpoint,
   filterObj

@@ -7,7 +7,6 @@ const {
   createDir,
   fileExists,
   createPDF,
-  createZIP,
   createJSON,
   markCheckpoint,
   filterObj
@@ -80,13 +79,6 @@ describe('createJSON', () => {
       'json/prog-four-grades.json'
     )
     expect(jsonPath).toEqual('json/prog-four-grades.json')
-  })
-})
-
-describe('createZIP', () => {
-  test('should return a ZIP directory path', () => {
-    const zipPath = createZIP('pdf/prog-four-pdf', 'zip/prog-four-pdf.zip')
-    expect(zipPath).toEqual('zip/prog-four-pdf.zip')
   })
 })
 
