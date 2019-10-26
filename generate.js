@@ -91,14 +91,13 @@ const createSubheading = (
 const generateCheckpoint = (myTotal, myTotalCount, myPracticals, myPracticalPercentage) => {
   createSubheading(1, 10, txtColor.earth, 'Total: ', txtColor.black, `You have completed ${myTotal} out of ${myTotalCount} practicals.`)
   createSubheading(1, 10, txtColor.earth, 'Percentage: ', txtColor.black, `You have gained ${myPracticals}% out of a possible ${myPracticalPercentage}%.`)
-  pdf.image('./public/img/web-one-cp-completion.png', 57, 350, { width: 400, height: 300 })
+  pdf.image('./public/img/web-one-cp-completion.png', 57, 350, { width: 350, height: 300 })
 }
 
 const generateAssignment = (myTbl, myAssignmentName, myTotal, myGrade, myPercentage, myAssignmentPercentage) => {
   createHeading(0, 13, txtColor.earth, `${myAssignmentName} Marking Schedule:`)
   createTable(txtColor.black, myTbl, 72, 95, 350, 10)
-  // createSubheading(1, 10, txtColor.earth, 'Comments: ', txtColor.black, 'Please refer to the feedback at the end of this document.')
-  createSubheading(1, 10, txtColor.earth, 'Grade: ', txtColor.black, `${myTotal} % (${myGrade})`)
+  createSubheading(1, 10, txtColor.earth, 'Grade: ', txtColor.black, `${myTotal}% (${myGrade})`)
   createSubheading(1, 10, txtColor.earth, 'Percentage: ', txtColor.black, `You have gained ${myPercentage}% out of a possible ${myAssignmentPercentage}%.`)
 }
 
@@ -139,7 +138,7 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
         `${s.practicals}%`,
         `${s.softwareprojects}%`,
         `${s.exam}%`,
-        `${s.overall} (${s.grade})`
+        `${s.overall}% (${s.grade})`
       ]
 
       const webOneRow = [
@@ -173,6 +172,12 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
         ['Requirements', '10', s.a1mark1],
         ['Code Quality', '10', s.a1mark2],
         ['Best Practices', '10', s.a1mark3]
+      ]
+
+      const nodeAppAssignment = [
+        ['Requirements', '10', s.a2mark1],
+        ['Code Quality', '10', s.a2mark2],
+        ['Best Practices', '10', s.a2mark3]
       ]
 
       const sba = [
@@ -209,22 +214,10 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
           markCheckpoint(progFourCPOne, inClassCPRowsOne)
           markCheckpoint(progFourCPTwo, inClassCPRowsTwo)
           table = { headers: courseAssessment.prog_four, rows: [progFourRow] }
-          inClassCheckpointsTblOne = {
-            headers: courseAssessment.prog_four_checkpoints_1,
-            rows: [inClassCPRowsOne]
-          }
-          inClassCheckpointsTblTwo = {
-            headers: courseAssessment.prog_four_checkpoints_2,
-            rows: [inClassCPRowsTwo]
-          }
-          assignmentOneTbl = {
-            headers: courseAssessment.markingSchedule,
-            rows: roguelikeAssignment
-          }
-          assignmentTwoTbl = {
-            headers: courseAssessment.markingSchedule,
-            rows: langExplorationAssignment
-          }
+          inClassCheckpointsTblOne = { headers: courseAssessment.prog_four_checkpoints_1, rows: [inClassCPRowsOne] }
+          inClassCheckpointsTblTwo = { headers: courseAssessment.prog_four_checkpoints_2, rows: [inClassCPRowsTwo] }
+          assignmentOneTbl = { headers: courseAssessment.markingSchedule, rows: roguelikeAssignment }
+          assignmentTwoTbl = { headers: courseAssessment.markingSchedule, rows: langExplorationAssignment }
           generate('Roguelike Assignment', coursePDFDirectory[2], myStudentFilename,
             courseCSVFile[2], courseJSONFile[2], 'IN628: Programming 4')
           break
@@ -235,19 +228,11 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
           const webOneCPOne = filterObj(s, /^checkpoint([1-9]|10)$/i)
           markCheckpoint(webOneCPOne, inClassCPRowsOne)
           table = { headers: courseAssessment.web_one, rows: [webOneRow] }
-          inClassCheckpointsTblOne = {
-            headers: courseAssessment.web_one_checkpoints,
-            rows: [inClassCPRowsOne]
-          }
+          inClassCheckpointsTblOne = { headers: courseAssessment.web_one_checkpoints, rows: [inClassCPRowsOne] }
+          skillsBasedAssessment = { headers: courseAssessment.sba_marks, rows: sba }
           courseAssessment.markingSchedule[1] = 'Total'
-          assignmentOneTbl = {
-            headers: courseAssessment.markingSchedule,
-            rows: staticSiteAssignment
-          }
-          skillsBasedAssessment = {
-            headers: courseAssessment.sba_marks,
-            rows: sba
-          }
+          assignmentOneTbl = { headers: courseAssessment.markingSchedule, rows: staticSiteAssignment }
+          assignmentTwoTbl = { headers: courseAssessment.markingSchedule, rows: nodeAppAssignment }
           generate('Item Review Static Site', coursePDFDirectory[3], myStudentFilename,
             courseCSVFile[3], courseJSONFile[3], 'IN510: Web 1 - Technology and Development')
           break
@@ -289,9 +274,12 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
         case courseCSVFile[3]:
           generateCheckpoint(s.total, '10', s.practicals, '20')
           pdf.addPage()
-          generateAssignment(assignmentOneTbl, assignmentName, s.a1total, s.a1grade, s.assignment1, '20')
-          pdf.addPage()
           generateAssignment(skillsBasedAssessment, 'Skills-Based Assessment', s.sbatotal, s.sbagrade, s.sba, '30')
+          pdf.addPage()
+          generateAssignment(assignmentOneTbl, assignmentName, s.a1total, s.a1grade, s.assignment1, '20')
+          pdf.image(`./public/img/web-one-assignment-completion.png`, 57, 235, { width: 350, height: 300 })
+          pdf.addPage()
+          generateAssignment(assignmentTwoTbl, 'Item Review Node.js Application', s.a2total, s.a2grade, s.assignment2, '30')
           pdf.addPage()
           break
         default:
