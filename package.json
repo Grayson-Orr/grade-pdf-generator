@@ -21,7 +21,7 @@
     "coveralls": "^3.0.7",
     "csv-parser": "^2.3.1",
     "dropbox-v2-api": "^2.4.6",
-    "glob": "^7.1.4",
+    "glob": "^7.1.5",
     "inquirer": "^7.0.0",
     "jest": "^24.9.0",
     "nodejs-nodemailer-outlook": "^1.2.1",
