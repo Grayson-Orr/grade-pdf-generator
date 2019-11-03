@@ -5,7 +5,7 @@
 
 require('colors')
 const PDFDocument = require('./pdf-tables')
-const { copyFile, createReadStream, createWriteStream } = require('fs')
+const { createReadStream, createWriteStream } = require('fs')
 const path = require('path')
 const csv = require('csv-parser')
 const data = require('./data.json')
@@ -98,17 +98,6 @@ const generateAssignment = (myTbl, myAssignmentName, myTotal, myGrade, myPercent
   createTable(txtColor.black, myTbl, 72, 95, 350, 10)
   createSubheading(1, 10, txtColor.earth, 'Grade: ', txtColor.black, `${myTotal}% (${myGrade})`)
   createSubheading(1, 10, txtColor.earth, 'Percentage: ', txtColor.black, `You have gained ${myPercentage}% out of a possible ${myAssignmentPercentage}%.`)
-}
-
-/**
- * @param {string} fileFrom
- * @param {string} fileTo
- */
-const copyFiles = (fileFrom, fileTo) => {
-  copyFile(fileFrom, fileTo, err => {
-    if (err) throw err
-    console.log(`${fileFrom} copied to ${fileTo}.`)
-  })
 }
 
 /**

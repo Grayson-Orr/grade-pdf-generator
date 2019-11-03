@@ -4,7 +4,7 @@
  */
 
 const path = require('path')
-const { existsSync, mkdirSync } = require('fs')
+const { copyFile, existsSync, mkdirSync } = require('fs')
 const csvToJson = require('convert-csv-to-json')
 
 /**
@@ -64,11 +64,23 @@ const filterObj = (myObj, myRegExp) => {
     .map(e => myObj[e])
 }
 
+/**
+ * @param {string} fileFrom
+ * @param {string} fileTo
+ */
+const copyFiles = (fileFrom, fileTo) => {
+  copyFile(fileFrom, fileTo, err => {
+    if (err) throw err
+    console.log(`${fileFrom} copied to ${fileTo}.`)
+  })
+}
+
 module.exports = {
   createDir,
   fileExists,
   createPDF,
   createJSON,
   markCheckpoint,
-  filterObj
+  filterObj,
+  copyFiles
 }
