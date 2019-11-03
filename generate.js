@@ -91,7 +91,6 @@ const createSubheading = (
 const generateCheckpoint = (myTotal, myTotalCount, myPracticals, myPracticalPercentage) => {
   createSubheading(1, 10, txtColor.earth, 'Total: ', txtColor.black, `You have completed ${myTotal} out of ${myTotalCount} practicals.`)
   createSubheading(1, 10, txtColor.earth, 'Percentage: ', txtColor.black, `You have gained ${myPracticals}% out of a possible ${myPracticalPercentage}%.`)
-  pdf.image('./public/img/web-one-cp-completion.png', 57, 350, { width: 350, height: 300 })
 }
 
 const generateAssignment = (myTbl, myAssignmentName, myTotal, myGrade, myPercentage, myAssignmentPercentage) => {
@@ -210,7 +209,7 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
          */
         case courseCSVFile[2]:
           const progFourCPOne = filterObj(s, /^checkpoint([1-9]|1[0-3])$/i)
-          const progFourCPTwo = filterObj(s, /^checkpoint(1[4-9]|2[0-4])\d*/i)
+          const progFourCPTwo = filterObj(s, /^checkpoint(1[4-9]|2[0-3])\d*/i)
           markCheckpoint(progFourCPOne, inClassCPRowsOne)
           markCheckpoint(progFourCPTwo, inClassCPRowsTwo)
           table = { headers: courseAssessment.prog_four, rows: [progFourRow] }
@@ -266,6 +265,7 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
         case courseCSVFile[2]:
           createTable(txtColor.black, inClassCheckpointsTblTwo, 72, 325, 425, 10)
           generateCheckpoint(s.total, '24', s.practicals, '15')
+          pdf.image('./public/img/prog-four-cp-completion.png', 57, 400, { width: 325, height: 325 })
           pdf.addPage()
           generateAssignment(assignmentOneTbl, assignmentName, s.a1total, s.a1grade, s.assignment1, '45')
           pdf.addPage()
@@ -273,11 +273,12 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
           break
         case courseCSVFile[3]:
           generateCheckpoint(s.total, '10', s.practicals, '20')
+          pdf.image('./public/img/web-one-cp-completion.png', 57, 350, { width: 325, height: 325 })
           pdf.addPage()
           generateAssignment(skillsBasedAssessment, 'Skills-Based Assessment', s.sbatotal, s.sbagrade, s.sba, '30')
           pdf.addPage()
           generateAssignment(assignmentOneTbl, assignmentName, s.a1total, s.a1grade, s.assignment1, '20')
-          pdf.image(`./public/img/web-one-assignment-completion.png`, 57, 235, { width: 350, height: 300 })
+          pdf.image('./public/img/web-one-assignment-completion.png', 57, 235, { width: 325, height: 325 })
           pdf.addPage()
           generateAssignment(assignmentTwoTbl, 'Item Review Node.js Application', s.a2total, s.a2grade, s.assignment2, '30')
           pdf.addPage()

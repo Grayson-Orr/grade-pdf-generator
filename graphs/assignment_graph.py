@@ -31,7 +31,7 @@ components = list(split_arr(comp_one, title[json_input][3] - 1))
 
 num_of_bars = np.arange(1)
 width = 0.10
-fig = plt.figure(figsize=(5, 5))
+fig = plt.figure(figsize=(6, 6))
 plt.title(f'{title[json_input][0]} - Average Score per Component')
 axis = fig.add_subplot(111)
 x_vals = [round(sum(components[0]) / len(components[0]), 3)]
@@ -40,7 +40,7 @@ y_vals = [round(sum(components[1]) / len(components[1]), 3)]
 rect_two = axis.bar(num_of_bars + width, y_vals, width, color='g')
 z_vals = [round(sum(components[2]) / len(components[2]), 3)]
 rect_three = axis.bar(num_of_bars + width * 2, z_vals, width, color='b')
-axis.set_ylabel('Scores')
+axis.set_ylabel('Score')
 axis.set_yticks(tuple(idx for idx in range(1, 11)))
 axis.set_xticks(num_of_bars + width)
 axis.set_xticklabels(('Cohort',))

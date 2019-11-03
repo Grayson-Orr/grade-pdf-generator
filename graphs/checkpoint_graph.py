@@ -12,7 +12,8 @@ def label(bar):
 
 json_input = sys.argv[1]
 stdnt_cp_total = []
-title = {'web-one-grades.json': ['Web 1', 'web-one', 11, 37]}
+title = {'prog-four-grades.json': ['Programming 4', 'prog-four', 24, 17],
+         'web-one-grades.json': ['Web 1', 'web-one', 11, 37]}
 
 with open(f'../json/{json_input}', 'r') as f:
     data = json.load(f)
@@ -24,7 +25,7 @@ with open(f'../json/{json_input}', 'r') as f:
         stdnt_cp_total.append(total)
 
 num_of_cps = tuple(idx for idx in range(1, title[json_input][2]))
-plt.figure(figsize=(5, 5))
+plt.figure(figsize=(6, 6))
 plt.title(f'{title[json_input][0]} - Completed Checkpoints')
 label(plt.bar(num_of_cps, stdnt_cp_total, align='center', color='r'))
 plt.xticks(num_of_cps)

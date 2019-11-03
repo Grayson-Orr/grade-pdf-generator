@@ -33,7 +33,7 @@ jsonPath.map((d, idx) => {
       from: email,
       to: `orrgl1@student.op.ac.nz`,
       subject: courseName,
-      html: `Hello, your course result for <b>${courseName}</b>, has been released on EBS. Please check your <b>"Results & Awards"</b> tab in your <b>Student Hub</b> portal. Have a good holiday.`,
+      html: `Hello, your course result for <b>${courseName}</b>, has been released on EBS. Please check your <b>"Results & Awards"</b> tab in your <b>Student Hub</b> portal. Enjoy your holidays.`,
       attachments: [
         {
           path: `./pdf/${coursePDF}/final/final-results-${githubname}.pdf`

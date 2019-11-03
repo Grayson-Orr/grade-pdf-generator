@@ -50,7 +50,7 @@ const createJSON = (myInput, myOutput) => {
  * @param {object} myCPRowArr
  */
 const markCheckpoint = (myCPArr, myCPRowArr) => {
-  myCPArr.map(p => (p === '0' ? myCPRowArr.push('N') : myCPRowArr.push('Y')))
+  myCPArr.map(p => (p === '0' ? myCPRowArr.push('No') : myCPRowArr.push('Yes')))
   return myCPRowArr
 }
 

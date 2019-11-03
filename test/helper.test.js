@@ -103,7 +103,18 @@ describe('markCheckpoint', () => {
   test('should return an array of complete/incomplete checkpoint 1-10 values', async () => {
     const checkpointArr = []
     const result = await markCheckpoint(filteredArr, checkpointArr)
-    expect(result).toEqual(['Y', 'N', 'Y', 'N', 'Y', 'Y', 'Y', 'N', 'Y', 'Y'])
+    expect(result).toEqual([
+      'Yes',
+      'No',
+      'Yes',
+      'No',
+      'Yes',
+      'Yes',
+      'Yes',
+      'No',
+      'Yes',
+      'Yes'
+    ])
   })
 })
 

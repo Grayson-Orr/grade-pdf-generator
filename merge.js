@@ -26,9 +26,10 @@ jsonPath.map((d, idx) => {
     PDFMerge(
       [
         `./pdf/${coursePDF}/results-${githubname}.pdf`,
-        `./pdf/${coursePDF}/roguelike/roguelike-${githubname}.pdf`
+        `./pdf/feedback/roguelike-${githubname}.pdf`,
+        `./pdf/feedback/language-exploration-${githubname}.pdf`
       ],
-      `./pdf/${coursePDF}/final/final-results-${githubname}.pdf`
+      `./pdf/final/results-${githubname}.pdf`
     )
       .then(_ => console.log(`PDF files merged for ${studentname}.`.blue))
       .catch(err => console.log(err))

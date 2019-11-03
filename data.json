@@ -26,7 +26,6 @@
   ],
   "courseAssessment": {
     "markingSchedule": ["Component", "Weight", "Score"],
-    "markingScheduleTwo": ["Component", "Weight", "Score"],
     "mobile": ["Practicals", "Project", "Exam", "Overall Grade"],
     "oosd": ["Practicals", "Project", "Exam", "Overall Grade"],
     "prog_four": [
@@ -61,8 +60,7 @@
       "CP 20",
       "CP 21",
       "CP 22",
-      "CP 23",
-      "CP 24"
+      "CP 23"
     ],
     "web_one_checkpoints": [
       "CP 1",
