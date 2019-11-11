@@ -26,7 +26,7 @@
     "nodejs-nodemailer-outlook": "^1.2.1",
     "pdfkit": "^0.9.1",
     "pdfmerge": "^1.0.2",
-    "prettier": "^1.18.2",
+    "prettier": "^1.19.1",
     "shelljs": "^0.8.3",
     "zip-local": "^0.3.4"
   }
