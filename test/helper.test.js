@@ -75,10 +75,10 @@ describe('createPDF', () => {
 describe('createJSON', () => {
   test('should return a JSON file path', () => {
     const jsonPath = createJSON(
-      'csv/prog-four-grades.csv',
-      'json/prog-four-grades.json'
+      'csv/web-one-grades.csv',
+      'json/web-one-grades.json'
     )
-    expect(jsonPath).toEqual('json/prog-four-grades.json')
+    expect(jsonPath).toEqual('json/web-one-grades.json')
   })
 })
 
