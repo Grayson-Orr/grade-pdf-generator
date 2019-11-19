@@ -18,8 +18,8 @@
 
 ## Config
 ### Step 1. Create a config.json
-1. Create a config.json in the root directory of the project.
-2. In config.json, create an object that holds the key/value for email, password and dropbox-access-token. Refer to the example below.
+1. Create a **config.json** in the root directory of the project.
+2. In **config.json**, create an object that holds the key/value for **email**, **password** and **dropbox-access-token**. Refer to the example below.
 
 ```json
 {
