@@ -100,9 +100,9 @@ describe('filterObj', () => {
 })
 
 describe('markCheckpoint', () => {
-  test('should return an array of complete/incomplete checkpoint 1-10 values', async () => {
+  test('should return an array of complete/incomplete checkpoint 1-10 values', () => {
     const checkpointArr = []
-    const result = await markCheckpoint(filteredArr, checkpointArr)
+    const result = markCheckpoint(filteredArr, checkpointArr)
     expect(result).toEqual([
       'Yes',
       'No',
