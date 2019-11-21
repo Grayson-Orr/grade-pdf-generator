@@ -23,8 +23,8 @@ const coursePDF = courses[courseName]
 
 glob(`./pdf/${coursePDF}/*.pdf`, {}, (err, files) => {
   files.map(f => {
-    let split = f.split('/')
-    let filePath = split[split.length - 1]
+    let fileSplit = f.split('/')
+    let filePath = fileSplit[fileSplit.length - 1]
     console.log(`Uploading ${filePath} to Dropbox.`.green)
     dropbox(
       {

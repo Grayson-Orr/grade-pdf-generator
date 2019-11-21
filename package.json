@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "web-one-generate": "cd graphs; python checkpoint_graph.py web-one-grades.json; python assignment_graph.py web-one-grades.json; cd ..; node generate.js web-one-grades.csv",
+    "prog-four-generate": "cd graphs; python checkpoint_graph.py prog-four-grades.json; cd ..; node generate.js prog-four-grades.csv",
     "pretty": "prettier '**/*.{js, json}' --write",
     "test": "jest",
     "test:watch": "jest --watch",

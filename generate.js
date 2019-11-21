@@ -151,9 +151,8 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
 
       const langExplorationAssignment = [
         ['Code commenting', '35%', `${s.a2mark1}%`],
-        ['Program structure', '20%', `${s.a2mark2}%`],
-        ['Code quality', '20%', `${s.a2mark3}%`],
-        ['Functionality and robustness', '25%', `${s.a2mark4}%`]
+        ['Program structure', '40%', `${s.a2mark2}%`],
+        ['Functionality and robustness', '25%', `${s.a2mark3}%`]
       ]
 
       const staticSiteAssignment = [
