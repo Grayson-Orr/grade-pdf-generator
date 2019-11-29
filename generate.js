@@ -197,7 +197,7 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
          */
         case courseCSVFile[2]:
           const progFourCPOne = filterObj(s, /^checkpoint([1-9]|1[0-3])$/i)
-          const progFourCPTwo = filterObj(s, /^checkpoint(1[4-9]|2[0-3])\d*/i)
+          const progFourCPTwo = filterObj(s, /^checkpoint(1[4-9]|2[0-2])\d*/i)
           markCheckpoint(progFourCPOne, inClassCPRowsOne)
           markCheckpoint(progFourCPTwo, inClassCPRowsTwo)
           table = { headers: courseAssessment.prog_four, rows: [progFourRow] }
@@ -252,12 +252,14 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
           break
         case courseCSVFile[2]:
           createTable(txtColor.black, inClassCheckpointsTblTwo, 72, 325, 425, 10)
-          generateCheckpoint(s.total, '24', s.practicals, '15')
+          generateCheckpoint(s.total, '22', s.practicals, '15')
           pdf.image('./public/img/prog-four-cp-completion.png', 57, 400, { width: 325, height: 325 })
           pdf.addPage()
           generateAssignment(assignmentOneTbl, assignmentName, s.a1total, s.a1grade, s.assignment1, '45')
+          createSubheading(1, 10, txtColor.earth, 'Comments: ', txtColor.black, 'Please go to the end of this document.')
           pdf.addPage()
           generateAssignment(assignmentTwoTbl, 'Langauge Exploration', s.a2total, s.a2grade, s.assignment2, '25')
+          createSubheading(1, 10, txtColor.earth, 'Comments: ', txtColor.black, 'Please go to the end of this document.')
           break
         case courseCSVFile[3]:
           generateCheckpoint(s.total, '10', s.practicals, '20')
@@ -266,10 +268,10 @@ createReadStream(path.join(__dirname, 'csv', csvFilename))
           generateAssignment(skillsBasedAssessment, 'Skills-Based Assessment', s.sbatotal, s.sbagrade, s.sba, '30')
           pdf.addPage()
           generateAssignment(assignmentOneTbl, assignmentName, s.a1total, s.a1grade, s.assignment1, '20')
-          pdf.image('./public/img/web-one-assignment-completion.png', 57, 235, { width: 325, height: 325 })
+          pdf.image('./public/img/web-one-assignment-1-completion.png', 57, 235, { width: 325, height: 325 })
           pdf.addPage()
           generateAssignment(assignmentTwoTbl, 'Item Review Node.js Application', s.a2total, s.a2grade, s.assignment2, '30')
-          pdf.addPage()
+          pdf.image('./public/img/web-one-assignment-2-completion.png', 57, 235, { width: 325, height: 325 })
           break
         default:
           break

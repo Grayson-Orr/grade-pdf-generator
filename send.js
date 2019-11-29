@@ -31,12 +31,13 @@ jsonPath.map((d, idx) => {
         pass: password
       },
       from: email,
-      to: `orrgl1@student.op.ac.nz`,
+      to: `${studentlogin}@student.op.ac.nz`,
+      cc: 'adon.moskal@op.ac.nz',
       subject: courseName,
-      html: `Hello, your course result for <b>${courseName}</b>, has been released on EBS. Please check your <b>"Results & Awards"</b> tab in your <b>Student Hub</b> portal. Enjoy your holidays.`,
+      html: `Hello, Adon and I have attached your final results for <b>${courseName}</b>. Your results have been released on EBS. Adon and I would like to thank you all for the semester. We have thoroughly enjoyed the experience and hope you have learned something during this time. Enjoy yours holidays and take care of yourselfs. See you next year.`,
       attachments: [
         {
-          path: `./pdf/${coursePDF}/final/final-results-${githubname}.pdf`
+          path: `./pdf/${coursePDF}/results-${githubname}.pdf`
         }
       ],
       onError: err => console.log(err),

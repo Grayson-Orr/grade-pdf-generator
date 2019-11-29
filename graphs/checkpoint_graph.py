@@ -12,7 +12,7 @@ def label(bar):
 
 json_input = sys.argv[1]
 stdnt_cp_total = []
-title = {'prog-four-grades.json': ['Programming 4', 'prog-four', 24, 17],
+title = {'prog-four-grades.json': ['Programming 4', 'prog-four', 23, 17],
          'web-one-grades.json': ['Web 1', 'web-one', 11, 37]}
 
 with open(f'../json/{json_input}', 'r') as f:

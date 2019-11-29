@@ -26,6 +26,7 @@ with open(f'../json/{json_input}', 'r') as f:
     for idx in range(1, 4):
         for d in range(len(data)):
             comp_one.append(float(data[d]['a1mark' + str(idx)]))
+            # comp_one.append(float(data[d]['a2mark' + str(idx)]))
 
 components = list(split_arr(comp_one, title[json_input][3] - 1))
 
@@ -49,4 +50,6 @@ axis.legend((rect_one[0], rect_two[0], rect_three[0]),
 label(rect_one)
 label(rect_two)
 label(rect_three)
-plt.savefig(f'../public/img/{title[json_input][1]}-assignment-completion.png')
+plt.savefig(
+    f'../public/img/{title[json_input][1]}-assignment-1-completion.png')
+    # f'../public/img/{title[json_input][1]}-assignment-2-completion.png')
