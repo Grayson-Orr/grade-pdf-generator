@@ -20,7 +20,7 @@
     "convert-csv-to-json": "0.0.15",
     "coveralls": "^3.0.9",
     "csv-parser": "^2.3.2",
-    "dropbox-v2-api": "^2.4.9",
+    "dropbox-v2-api": "^2.4.10",
     "glob": "^7.1.6",
     "inquirer": "^7.0.1",
     "jest": "^24.9.0",
