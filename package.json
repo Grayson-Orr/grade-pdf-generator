@@ -19,7 +19,7 @@
     "colors": "^1.4.0",
     "convert-csv-to-json": "0.0.15",
     "coveralls": "^3.0.9",
-    "csv-parser": "^2.3.2",
+    "csv-parser": "^3.0.0",
     "dropbox-v2-api": "^2.4.11",
     "glob": "^7.1.6",
     "inquirer": "^7.0.3",
